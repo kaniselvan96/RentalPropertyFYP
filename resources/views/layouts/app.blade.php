@@ -87,10 +87,10 @@
 
 
     <!-- Core -->
-    <script src="{{ asset('js/jquery.min.js') }}" ></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script>
+    <!-- <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script> -->
     <!-- Argon JS -->
-    <script src="{{ asset('js/argon.js') }}"></script>
+    <!-- <script src="{{ asset('js/argon.js') }}"></script> -->
 
 </body>
 </html>
