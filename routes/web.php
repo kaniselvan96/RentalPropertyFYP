@@ -21,4 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//house
+Route::get('/listhouse', [App\Http\Controllers\HomeController::class, 'list'])->name('listhome');
+Route::get('/viewhouse/{id}', [App\Http\Controllers\HomeController::class, 'view'])->name('viewhome');
 Route::get('/createhome', [App\Http\Controllers\HomeController::class, 'create'])->name('createhome');
+Route::post('/store', [App\Http\Controllers\HomeController::class, 'store'])->name('storehome');

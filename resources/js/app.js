@@ -27,6 +27,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component(
+    "house-create",
+    require("./modules/house/HouseCreate.vue").default
+);
+Vue.component(
+    "house-list",
+    require("./modules/house/HouseList.vue").default
+);
+Vue.component(
+    "house-view",
+    require("./modules/house/HouseView.vue").default
+);
+
 const app = new Vue({
     el: '#app',
 });

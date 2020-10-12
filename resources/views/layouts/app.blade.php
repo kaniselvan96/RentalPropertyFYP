@@ -24,7 +24,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nucleo.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/argon.css') }}" rel="stylesheet">
+    @yield('style')
 
 </head>
 <body>
@@ -87,10 +89,12 @@
 
 
     <!-- Core -->
-    <!-- <script src="{{ asset('js/jquery.min.js') }}" ></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script> -->
+     <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script> 
     <!-- Argon JS -->
-    <!-- <script src="{{ asset('js/argon.js') }}"></script> -->
-
+    <script src="{{ asset('js/js.cookie.js') }}"></script>
+  
+     <script src="{{ asset('js/argon.js') }}"></script>
+     @yield('script')
 </body>
 </html>

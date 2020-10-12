@@ -13,7 +13,7 @@ class CreateHouse extends Migration
      */
     public function up()
     {
-        Schema::create('house', function (Blueprint $table) {
+        Schema::create('houses', function (Blueprint $table) {
             $table->bigincrements('house_id');
             $table->unsignedBigInteger('landlord_id');
             $table->foreign('landlord_id')->references('id')->on('users');
@@ -34,7 +34,7 @@ class CreateHouse extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('preference_id');
-            $table->string('accommodation_id');
+            $table->string('facilities');
             $table->string('description');
             $table->string('status');
             $table->timestamps();
