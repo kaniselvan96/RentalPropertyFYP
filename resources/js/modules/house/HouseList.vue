@@ -11,9 +11,16 @@
           <div class="card">
             <!-- Card header -->
             <div class="card-header">
-              <h3 class="mb-0">List of House</h3>
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Rental List</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a v-bind:href="'/createhouse/'" class="btn btn-sm btn-primary">Add</a>
+                </div>
+              </div>
             </div>
-            <div class="table-responsive py-4">
+            <div class="table-responsive">
               <table id="meetingTable2" class="table table-flush">
                 <thead class="thead-light">
                   <tr>

@@ -383,10 +383,11 @@ export default {
         description: this.description,
       };
       axios
-        .post("/store", houseData)
+        .post("/storehouse", houseData)
         // .post("/meeting", data)
         .then((response) => {
           console.log("response", response);
+          location.href = '/listhouse';
         })
         .catch(function (error) {
           console.log("response", error);

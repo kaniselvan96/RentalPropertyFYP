@@ -29,8 +29,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    function list() 
-    {
+    function list() {
         $houseList = DB::table('houses')->get();
         return view('house.list', compact('houseList'));
     }
@@ -38,7 +37,9 @@ class HomeController extends Controller
     public function view($id)
     {
         $houseView = DB::table('houses')->where('house_id', $id)->first();
-        return view('house.view', compact('houseView'));
+        $savedfacilities = $houseView->facilities;
+        // dd($savedfacilities);
+        return view('house.view', compact('houseView', 'savedfacilities'));
     }
 
     public function create()
@@ -81,6 +82,35 @@ class HomeController extends Controller
             'description' => $request['description'],
             'landlord_id' => Auth::user()->id,
         ]);
+        return response()->json($house, 201);
+    }
+    
+    public function update(Request $request, $id)
+    {
+        
+        $house = House::find($id);
+        
+        $house->title = $request['title'];
+        $house->property_type = $request['property_type'];
+        $house->property_name = $request['property_name'];
+        $house->floor = $request['floor'];
+        $house->bedroom = $request['bedroom'];
+        $house->bathroom = $request['bathroom'];
+        $house->parking = $request['parking'];
+        $house->furnishing = $request['furnishing'];
+        $house->rental = $request['rental'];
+        $house->deposit = $request['deposit'];
+        $house->address_line1 = $request['address_line1'];
+        $house->address_line2 = $request['address_line2'];
+        $house->postcode = $request['postcode'];
+        $house->city = $request['city'];
+        $house->state = $request['state'];
+        $house->facilities = json_encode($request['checkedfacilities']);
+        $house->description = $request['description'];
+        $house->landlord_id = Auth::user()->id;
+
+        $house->save();
+
         return response()->json($house, 201);
     }
 }

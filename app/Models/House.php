@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class House extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'house_id';
     protected $guarded = [];
 }

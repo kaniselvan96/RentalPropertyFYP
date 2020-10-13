@@ -2324,9 +2324,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         checkedfacilities: this.checkedfacilities,
         description: this.description
       };
-      axios.post("/store", houseData) // .post("/meeting", data)
+      axios.post("/storehouse", houseData) // .post("/meeting", data)
       .then(function (response) {
         console.log("response", response);
+        location.href = '/listhouse';
       })["catch"](function (error) {
         console.log("response", error);
       });
@@ -2345,6 +2346,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2757,7 +2765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["houseview"],
+  props: ["houseview", "savedfacilities"],
   components: {},
   data: function data() {
     var _ref;
@@ -2779,7 +2787,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       city: this.houseview.city,
       state: this.houseview.state,
       description: this.houseview.description
-    }, _defineProperty(_ref, "state", this.houseview.state), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", [this.houseview.checkedfacilities]), _ref;
+    }, _defineProperty(_ref, "state", this.houseview.state), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", this.savedfacilities), _ref;
   },
   //   created () {
   //           this.title= this.houseview.title
@@ -2822,9 +2830,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         checkedfacilities: this.checkedfacilities,
         description: this.description
       };
-      axios.post("/store", houseData) // .post("/meeting", data)
+      axios.post("/updatehouse/" + this.houseview.house_id, houseData) // .post("/meeting", data)
       .then(function (response) {
         console.log("response", response);
+        location.href = '/listhouse';
       })["catch"](function (error) {
         console.log("response", error);
       });
@@ -39392,9 +39401,24 @@ var render = function() {
         _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-xl-8" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "card-header" }, [
+                _c("div", { staticClass: "row align-items-center" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { href: "/createhouse/" }
+                      },
+                      [_vm._v("Add")]
+                    )
+                  ])
+                ])
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive py-4" }, [
+              _c("div", { staticClass: "table-responsive" }, [
                 _c(
                   "table",
                   {
@@ -39447,8 +39471,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "mb-0" }, [_vm._v("List of House")])
+    return _c("div", { staticClass: "col-8" }, [
+      _c("h3", { staticClass: "mb-0" }, [_vm._v("Rental List")])
     ])
   },
   function() {

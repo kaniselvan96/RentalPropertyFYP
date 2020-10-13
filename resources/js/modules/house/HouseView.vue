@@ -338,7 +338,7 @@
 
 <script>
 export default {
-  props: ["houseview"],
+  props: ["houseview","savedfacilities"],
   components: {},
   data() {
     return {
@@ -367,8 +367,7 @@ export default {
         "Wardrobe",
         "Ceiling fan",
       ],
-
-      checkedfacilities: [this.houseview.checkedfacilities],
+      checkedfacilities: this.savedfacilities,
     };
   }, 
 //   created () {
@@ -415,10 +414,11 @@ export default {
         description: this.description,
       };
       axios
-        .post("/store", houseData)
+        .post("/updatehouse/"+this.houseview.house_id, houseData)
         // .post("/meeting", data)
         .then((response) => {
           console.log("response", response);
+          location.href = '/listhouse';
         })
         .catch(function (error) {
           console.log("response", error);

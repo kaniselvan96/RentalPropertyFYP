@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    
+                    </br><a href="{{route('listhome')}}" class="btn btn-sm btn-info mr-4">View House</a>
                 </div>
             </div>
         </div>
