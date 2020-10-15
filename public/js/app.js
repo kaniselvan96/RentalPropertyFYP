@@ -2281,51 +2281,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
   data: function data() {
@@ -2348,70 +2303,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       city: "",
       state: "",
       description: ""
-    }, _defineProperty(_ref, "state", ""), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", []), _defineProperty(_ref, "name", ""), _defineProperty(_ref, "alias", ""), _defineProperty(_ref, "sex", ""), _defineProperty(_ref, "sez", [{
-      date: null,
-      details: null
-    }]), _defineProperty(_ref, "images", []), _defineProperty(_ref, "maxImages", 5), _defineProperty(_ref, "addImage", "button.add-image"), _ref;
+    }, _defineProperty(_ref, "state", ""), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", []), _ref;
   },
   computed: {},
   methods: {
-    addNewRow: function addNewRow() {
-      // I changed to `this.sez.push` because `this.seziure` is `undefined`.
-      this.sez.push({
-        date: null,
-        details: null
-      });
-    },
-    addNewImage: function addNewImage(e) {
-      var n = this.maxImages || -1;
-
-      if (n && this.images.length < n) {
-        this.images.push("");
-      }
-
-      this.checkImages();
-    },
-    removeImage: function removeImage(index) {
-      this.images.splice(index, 1);
-      this.checkImages();
-    },
-    checkImages: function checkImages() {
-      var n = this.maxImages || -1;
-
-      if (n && this.images.length >= n) {
-        $(this.addImage, this.el).prop("disabled", true); // Disables the button.
-      } else {
-        $(this.addImage, this.el).prop("disabled", false); // Enables the button.
-      }
-    },
-    previewImage: function previewImage(index, e) {
-      var r = new FileReader(),
-          f = e.target.files[0];
-      r.addEventListener("load", function () {
-        $('[class~="images[' + index + ']-preview"]', this.el).html('<img src="' + r.result + '" class="thumbnail img-responsive">');
-      }, false);
-
-      if (f) {
-        r.readAsDataURL(f);
-      }
-    },
     formSubmit: function formSubmit(event) {
       // https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
-      var vm = this;
-      var data = new FormData(e.target);
-      data.append('sez', this.sez);
-      data.append('name', this.name);
-      data.append('alias', this.alias);
-      data.append('sex', this.sex); // The `data` already contain the Signature and Recent Photograph images.
-      // Here we add the extra images as an array.
-
-      $('[class~="images[]"]', this.el).each(function (i) {
-        if (i > vm.maxImages - 1) {
-          return; // Max images reached.
-        }
-
-        data.append('images[' + i + ']', this.files[0]);
-      });
       var houseData = {
         title: this.title,
         property_type: this.property_type,
@@ -2431,7 +2328,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         checkedfacilities: this.checkedfacilities,
         description: this.description
       };
-      axios.post("/storehousel", houseData) // .post("/meeting", data)
+      axios.post("/storehouse", houseData) // .post("/meeting", data)
       .then(function (response) {
         console.log("response", response);
         location.href = "/listhouse";
@@ -2444,87 +2341,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseList.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseList.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["houselist"],
-  components: {},
-  created: function created() {},
-  data: function data() {
-    return {
-      houseAllList: this.houselist
-    };
-  },
-  computed: {},
-  methods: {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseView.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseView.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -2940,12 +2759,254 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post("/updatehouse/" + this.houseview.house_id, houseData) // .post("/meeting", data)
       .then(function (response) {
         console.log("response", response);
-        location.href = '/listhouse';
+        location.href = "/listhouse";
       })["catch"](function (error) {
         console.log("response", error);
       });
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseList.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseList.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["houselist"],
+  components: {},
+  created: function created() {},
+  data: function data() {
+    return {
+      houseAllList: this.houselist
+    };
+  },
+  computed: {},
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseView.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseView.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["houseview", "savedfacilities"],
+  components: {},
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      title: this.houseview.title,
+      property_type: this.houseview.property_type,
+      property_name: this.houseview.property_name,
+      floor: this.houseview.floor,
+      bedroom: this.houseview.bedroom,
+      bathroom: this.houseview.bathroom,
+      parking: this.houseview.parking,
+      furnishing: this.houseview.furnishing,
+      rental: this.houseview.rental,
+      deposit: this.houseview.deposit,
+      address_line1: this.houseview.address_line1,
+      address_line2: this.houseview.address_line2,
+      postcode: this.houseview.postcode,
+      city: this.houseview.city,
+      state: this.houseview.state,
+      description: this.houseview.description
+    }, _defineProperty(_ref, "state", this.houseview.state), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", this.savedfacilities), _ref;
+  },
+  computed: {},
+  methods: {}
 });
 
 /***/ }),
@@ -39444,97 +39505,9 @@ var render = function() {
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Create")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "file", name: "photo", accept: "image/*" },
-                      on: {
-                        change: function($event) {
-                          return _vm.setPhotoFiles(
-                            $event.target.name,
-                            $event.target.files
-                          )
-                        }
-                      }
-                    })
+                    )
                   ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c(
-                    "ul",
-                    {
-                      staticClass: "list-group",
-                      attrs: { if: _vm.images.length }
-                    },
-                    _vm._l(_vm.images, function(f, index) {
-                      return _c(
-                        "li",
-                        { key: index, staticClass: "list-group-item" },
-                        [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "close",
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.removeImage(index, $event)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                    ×\n                  "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "button success expand radius" },
-                            [
-                              _c(
-                                "label",
-                                { staticClass: "custom-file-upload" },
-                                [
-                                  _c("input", {
-                                    staticClass: "images[]",
-                                    attrs: { type: "file", accept: "image/*" },
-                                    on: {
-                                      change: function($event) {
-                                        return _vm.previewImage(index, $event)
-                                      }
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", {
-                            class: "images[" + index + "]-preview image-preview"
-                          })
-                        ]
-                      )
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-link add-image",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.addNewImage($event)
-                        }
-                      }
-                    },
-                    [_vm._v("\n                Add Image\n              ")]
-                  )
-                ])
+                )
               ])
             ])
           ])
@@ -39573,133 +39546,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseList.vue?vue&type=template&id=538c490e&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseList.vue?vue&type=template&id=538c490e&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "main-content mt-1", attrs: { id: "panel" } },
-    [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-xl-8" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _c("div", { staticClass: "row align-items-center" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4 text-right" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-sm btn-primary",
-                        attrs: { href: "/createhouse/" }
-                      },
-                      [_vm._v("Add")]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "table-responsive" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-flush",
-                    attrs: { id: "meetingTable2" }
-                  },
-                  [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.houselist, function(house, key) {
-                        return _c("tr", { key: key }, [
-                          _c("td", [_vm._v(_vm._s(house.title))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(house.property_type))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(house.property_name))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(house.city))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(house.status))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-info mr-4",
-                                attrs: { href: "/viewhouse/" + house.house_id }
-                              },
-                              [_vm._v("View")]
-                            )
-                          ])
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("h3", { staticClass: "mb-0" }, [_vm._v("Rental List")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
-      _c("tr", [
-        _c("th", [_vm._v("title")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("property type")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("property name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("city")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("status")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("action")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseView.vue?vue&type=template&id=6567ec00&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseView.vue?vue&type=template&id=6567ec00&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true& ***!
   \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -40608,6 +40457,401 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "form-group" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseList.vue?vue&type=template&id=538c490e&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseList.vue?vue&type=template&id=538c490e&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "main-content mt-1", attrs: { id: "panel" } },
+    [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-xl-8" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("div", { staticClass: "row align-items-center" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { href: "/createhouse/" }
+                      },
+                      [_vm._v("Add")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "table-responsive" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-flush",
+                    attrs: { id: "meetingTable2" }
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.houselist, function(house, key) {
+                        return _c("tr", { key: key }, [
+                          _c("td", [_vm._v(_vm._s(house.title))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(house.property_type))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(house.property_name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(house.city))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(house.status))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-sm btn-info mr-4",
+                                attrs: { href: "/viewhouse/" + house.house_id }
+                              },
+                              [_vm._v("View")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-sm btn-warning mr-4",
+                                attrs: { href: "/edithouse/" + house.house_id }
+                              },
+                              [_vm._v("Edit")]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("h3", { staticClass: "mb-0" }, [_vm._v("Rental List")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", [_vm._v("title")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("property type")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("property name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("city")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("status")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("action")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseView.vue?vue&type=template&id=6567ec00&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseView.vue?vue&type=template&id=6567ec00&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "main-content mt-1", attrs: { id: "panel" } },
+    [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-xl-8 order-xl-1" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Title")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.title))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "my-4" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Property Type")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.property_type))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Property Name")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.property_name))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Floor")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.floor))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Bedroom")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.bedroom))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Bathroom")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.bathroom))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Parking")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.parking))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Furnishing")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.furnishing))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "my-4" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Rental")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.rental))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Deposit")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.deposit))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "my-4" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Address Line1")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.address_line1))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Address Line2")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.address_line2))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Postcode")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.postcode))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("City")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.city))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("State")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.state))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "my-4" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4 my-2" }, [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v("Description")
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "h2 card-title mb-0" }, [
+                          _vm._v(_vm._s(_vm.description))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("hr", { staticClass: "my-4" }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "row" },
+                      _vm._l(_vm.checkedfacilities, function(product, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "col-md-4 my-2" },
+                          [
+                            _c("div", { staticClass: "col ml--2" }, [
+                              _c("span", { staticClass: "text-primary" }, [
+                                _vm._v("●")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "h2 card-title mb-0" },
+                                [_vm._v(_vm._s(product))]
+                              )
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "row align-items-center" }, [
+        _c("div", { staticClass: "col-8" }, [
+          _c("h3", { staticClass: "mb-0" }, [_vm._v("Rental Property")])
+        ])
       ])
     ])
   }
@@ -52815,6 +53059,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component("house-create", __webpack_require__(/*! ./modules/house/HouseCreate.vue */ "./resources/js/modules/house/HouseCreate.vue")["default"]);
 Vue.component("house-list", __webpack_require__(/*! ./modules/house/HouseList.vue */ "./resources/js/modules/house/HouseList.vue")["default"]);
 Vue.component("house-view", __webpack_require__(/*! ./modules/house/HouseView.vue */ "./resources/js/modules/house/HouseView.vue")["default"]);
+Vue.component("house-edit", __webpack_require__(/*! ./modules/house/HouseEdit.vue */ "./resources/js/modules/house/HouseEdit.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -53004,6 +53249,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/modules/house/HouseEdit.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/modules/house/HouseEdit.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true& */ "./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true&");
+/* harmony import */ var _HouseEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HouseEdit.vue?vue&type=script&lang=js& */ "./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _HouseEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "34fbfa36",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/modules/house/HouseEdit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./HouseEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseEdit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseEdit.vue?vue&type=template&id=34fbfa36&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseEdit_vue_vue_type_template_id_34fbfa36_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/modules/house/HouseList.vue":
 /*!**************************************************!*\
   !*** ./resources/js/modules/house/HouseList.vue ***!
@@ -53160,8 +53474,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -39,6 +39,10 @@ Vue.component(
     "house-view",
     require("./modules/house/HouseView.vue").default
 );
+Vue.component(
+    "house-edit",
+    require("./modules/house/HouseEdit.vue").default
+);
 
 const app = new Vue({
     el: '#app',

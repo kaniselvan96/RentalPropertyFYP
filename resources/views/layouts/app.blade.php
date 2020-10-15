@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -90,11 +90,11 @@
 
     <!-- Core -->
      <script src="{{ asset('js/jquery.min.js') }}" ></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script> 
+    {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}" ></script>  --}}
     <!-- Argon JS -->
-    <script src="{{ asset('js/js.cookie.js') }}"></script>
+    {{-- <script src="{{ asset('js/js.cookie.js') }}"></script> --}}
   
-     <script src="{{ asset('js/argon.js') }}"></script>
-     @yield('script')
+     {{-- <script src="{{ asset('js/argon.js') }}"></script> --}}
+     {{-- @yield('script') --}}
 </body>
 </html>

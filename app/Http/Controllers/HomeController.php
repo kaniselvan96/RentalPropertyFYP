@@ -41,6 +41,13 @@ class HomeController extends Controller
         // dd($savedfacilities);
         return view('house.view', compact('houseView', 'savedfacilities'));
     }
+    public function edit($id)
+    {
+        $houseView = DB::table('houses')->where('house_id', $id)->first();
+        $savedfacilities = $houseView->facilities;
+        // dd($savedfacilities);
+        return view('house.edit', compact('houseView', 'savedfacilities'));
+    }
 
     public function create()
     {
@@ -49,7 +56,7 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->houseData->title);
         // print_r(json_decode($request->reso_data));
         // $test = json_decode($request->reso_data);
         // dd($test[0]->reso_no);

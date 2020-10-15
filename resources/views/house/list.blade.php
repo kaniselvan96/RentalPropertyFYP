@@ -3,7 +3,7 @@
 
 
 @extends('layouts.app')
-
+@section('title', Auth::user()->user_type)
 @section('style')
 <link href="{!! asset('css/dataTables.bootstrap4.min.css') !!}" media="all" rel="stylesheet" type="text/css" />
 @endsection

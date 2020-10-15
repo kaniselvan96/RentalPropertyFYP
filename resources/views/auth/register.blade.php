@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Register')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -58,6 +58,20 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio mb-2">
+                                    <input name="user_type" class="custom-control-input" id="rental" type="radio" value="rental">
+                                    <label class="custom-control-label" for="rental">Looking for Rent</label>
+                                  </div>
+                                  <div class="custom-control custom-radio mb-2">
+                                    <input name="user_type" class="custom-control-input" id="landlord" checked="" type="radio" value="landlord">
+                                    <label class="custom-control-label" for="landlord">Landlord</label>
+                                  </div>
                             </div>
                         </div>
 

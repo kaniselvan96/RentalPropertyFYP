@@ -338,26 +338,27 @@
 
 <script>
 export default {
-  created() {},
+  props: ["houseview", "savedfacilities"],
+  components: {},
   data() {
     return {
-      title: "",
-      property_type: "",
-      property_name: "",
-      floor: "",
-      bedroom: "",
-      bathroom: "",
-      parking: "",
-      furnishing: "",
-      rental: "",
-      deposit: "",
-      address_line1: "",
-      address_line2: "",
-      postcode: "",
-      city: "",
-      state: "",
-      description: "",
-      state: "",
+      title: this.houseview.title,
+      property_type: this.houseview.property_type,
+      property_name: this.houseview.property_name,
+      floor: this.houseview.floor,
+      bedroom: this.houseview.bedroom,
+      bathroom: this.houseview.bathroom,
+      parking: this.houseview.parking,
+      furnishing: this.houseview.furnishing,
+      rental: this.houseview.rental,
+      deposit: this.houseview.deposit,
+      address_line1: this.houseview.address_line1,
+      address_line2: this.houseview.address_line2,
+      postcode: this.houseview.postcode,
+      city: this.houseview.city,
+      state: this.houseview.state,
+      description: this.houseview.description,
+      state: this.houseview.state,
       facilities: [
         "Refrigerator",
         "Cooker",
@@ -366,15 +367,33 @@ export default {
         "Wardrobe",
         "Ceiling fan",
       ],
-
-      checkedfacilities: [],
+      checkedfacilities: this.savedfacilities,
     };
   },
+  //   created () {
+
+  //           this.title= this.houseview.title
+  //       this.property_type= this.houseview.property_type
+  //       this.property_name= this.houseview.property_name
+  //       this.floor= this.houseview.floor
+  //       this.this.bedroom= this.houseview.bedroom
+  //       this.bathroom= this.houseview.bathroom
+  //       this.parking= this.houseview.parking
+  //       this.furnishing= this.houseview.furnishing
+  //       this.rental= this.houseview.rental
+  //       this.deposit= this.houseview.deposit
+  //       this.address_line1= this.houseview.address_line1
+  //       this.this.address_line2= this.houseview.address_line2
+  //       this.postcode= this.houseview.postcode
+  //       this.city= this.houseview.city
+  //       this.state= this.houseview.state
+  //       this.description= this.houseview.description
+  //       this.state= this.houseview.state
+
+  //     },
   computed: {},
   methods: {
     formSubmit(event) {
-      // https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
-
       let houseData = {
         title: this.title,
         property_type: this.property_type,
@@ -395,7 +414,7 @@ export default {
         description: this.description,
       };
       axios
-        .post("/storehouse", houseData)
+        .post("/updatehouse/" + this.houseview.house_id, houseData)
         // .post("/meeting", data)
         .then((response) => {
           console.log("response", response);
@@ -409,4 +428,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

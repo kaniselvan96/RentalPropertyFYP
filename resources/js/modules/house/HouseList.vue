@@ -39,7 +39,7 @@
                     <td>{{house.property_name}}</td>
                     <td>{{house.city}}</td>
                     <td>{{house.status}}</td>
-                    <td><a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-info mr-4">View</a></td>
+                    <td><a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-info mr-4">View</a> <a v-bind:href="'/edithouse/'+ house.house_id" class="btn btn-sm btn-warning mr-4">Edit</a></td>
                   </tr>
                  
                 </tbody>

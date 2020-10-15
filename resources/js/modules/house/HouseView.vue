@@ -11,323 +11,107 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Create Rental Property</h3>
+                  <h3 class="mb-0">Rental Property</h3>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <form v-on:submit.prevent="formSubmit">
-                <h6 class="heading-small text-muted mb-4">
-                  Rental information
-                </h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-title"
-                          >Title</label
-                        >
-                        <input
-                          type="text"
-                          id="input-titletitle"
-                          class="form-control"
-                          placeholder="Title"
-                          v-model="title"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label
-                          class="form-control-label"
-                          for="input-property_type"
-                          >Property Type</label
-                        >
-                        <input
-                          type="text"
-                          id="input-property_type"
-                          class="form-control"
-                          placeholder=""
-                          v-model="property_type"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label
-                          class="form-control-label"
-                          for="input-property_name"
-                          >Property Name</label
-                        >
-                        <input
-                          type="text"
-                          id="input-property_name"
-                          class="form-control"
-                          placeholder="property_name"
-                          v-model="property_name"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-floor"
-                          >Floor</label
-                        >
-                        <input
-                          type="text"
-                          id="input-floor"
-                          class="form-control"
-                          placeholder="floor"
-                          v-model="floor"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-bedroom"
-                          >Bedroom</label
-                        >
-                        <input
-                          type="text"
-                          id="input-bedroom"
-                          class="form-control"
-                          placeholder="bedroom"
-                          v-model="bedroom"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-bathroom"
-                          >Bathroom</label
-                        >
-                        <input
-                          type="text"
-                          id="input-bathroom"
-                          class="form-control"
-                          placeholder="bathroom"
-                          v-model="bathroom"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-parking"
-                          >Parking</label
-                        >
-                        <input
-                          type="text"
-                          id="input-parking"
-                          class="form-control"
-                          placeholder="parking"
-                          v-model="parking"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-furnishing"
-                          >Furnishing</label
-                        >
-                        <input
-                          type="text"
-                          id="input-furnishing"
-                          class="form-control"
-                          placeholder="furnishing"
-                          v-model="furnishing"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">
-                  Payment information
-                </h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-rental"
-                          >Rental</label
-                        >
-                        <input
-                          type="text"
-                          id="input-rental"
-                          class="form-control"
-                          placeholder="rental"
-                          v-model="rental"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-deposit"
-                          >Deposit</label
-                        >
-                        <input
-                          type="text"
-                          id="input-deposit"
-                          class="form-control"
-                          placeholder="deposit"
-                          v-model="deposit"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">
-                  Contact information
-                </h6>
-                <div class="pl-lg-4">
+              <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+              <div class="row">
+                <div class="col-md-8">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="form-group">
-                        <label
-                          class="form-control-label"
-                          for="input-address_line1"
-                          >Address Line 1</label
-                        >
-                        <input
-                          id="input-address"
-                          class="form-control"
-                          placeholder="Home address"
-                          v-model="address_line1"
-                          type="text"
-                        />
-                      </div>
+                      <small class="text-muted">Title</small>
+                      <h5 class="h2 card-title mb-0">{{ title }}</h5>
                     </div>
                   </div>
+                  <hr class="my-4" />
                   <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label
-                          class="form-control-label"
-                          for="input-address_line2"
-                          >Address Line 2</label
-                        >
-                        <input
-                          id="input-address"
-                          class="form-control"
-                          placeholder="Home address"
-                          v-model="address_line2"
-                          type="text"
-                        />
-                      </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Property Type</small>
+                      <h5 class="h2 card-title mb-0">{{ property_type }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Property Name</small>
+                      <h5 class="h2 card-title mb-0">{{ property_name }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Floor</small>
+                      <h5 class="h2 card-title mb-0">{{ floor }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Bedroom</small>
+                      <h5 class="h2 card-title mb-0">{{ bedroom }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Bathroom</small>
+                      <h5 class="h2 card-title mb-0">{{ bathroom }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Parking</small>
+                      <h5 class="h2 card-title mb-0">{{ parking }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Furnishing</small>
+                      <h5 class="h2 card-title mb-0">{{ furnishing }}</h5>
                     </div>
                   </div>
+                  <hr class="my-4" />
                   <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-postcode"
-                          >Postcode</label
-                        >
-                        <input
-                          type="text"
-                          id="input-postcode"
-                          class="form-control"
-                          placeholder="postcode"
-                          v-model="postcode"
-                        />
-                      </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Rental</small>
+                      <h5 class="h2 card-title mb-0">{{ rental }}</h5>
                     </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city"
-                          >City</label
-                        >
-                        <input
-                          type="text"
-                          id="input-city"
-                          class="form-control"
-                          placeholder="city"
-                          v-model="city"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="state"
-                          >State</label
-                        >
-                        <select class="form-control" id="state" v-model="state">
-                          <option value="Johor">Johor</option>
-                          <option value="Kedah">Kedah</option>
-                          <option value="Kelantan">Kelantan</option>
-                          <option value="Kuala Lumpur">Kuala Lumpur</option>
-                          <option value="Labuan">Labuan</option>
-                          <option value="Malacca">Malacca</option>
-                          <option value="Negeri Sembilan">
-                            Negeri Sembilan
-                          </option>
-                          <option value="Pahang">Pahang</option>
-                          <option value="Perak">Perak</option>
-                          <option value="Perlis">Perlis</option>
-                          <option value="Penang">Penang</option>
-                          <option value="Sabah">Sabah</option>
-                          <option value="Sarawak">Sarawak</option>
-                          <option value="Selangor">Selangor</option>
-                          <option value="Terengganu">Terengganu</option>
-                        </select>
-                      </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Deposit</small>
+                      <h5 class="h2 card-title mb-0">{{ deposit }}</h5>
                     </div>
                   </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Facilities -->
-                <h6 class="heading-small text-muted mb-4">Rental Facilities</h6>
-                <div class="pl-lg-4">
+                  <hr class="my-4" />
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group"></div>
+                    <div class="col-md-12 my-2">
+                      <small class="text-muted">Address Line1</small>
+                      <h5 class="h2 card-title mb-0">{{ address_line1 }}</h5>
+                    </div>
+                    <div class="col-md-12 my-2">
+                      <small class="text-muted">Address Line2</small>
+                      <h5 class="h2 card-title mb-0">{{ address_line2 }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Postcode</small>
+                      <h5 class="h2 card-title mb-0">{{ postcode }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">City</small>
+                      <h5 class="h2 card-title mb-0">{{ city }}</h5>
+                    </div>
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">State</small>
+                      <h5 class="h2 card-title mb-0">{{ state }}</h5>
                     </div>
                   </div>
+                  <hr class="my-4" />
+                  <div class="row">
+                    <div class="col-md-4 my-2">
+                      <small class="text-muted">Description</small>
+                      <h5 class="h2 card-title mb-0">{{ description }}</h5>
+                    </div>
+                  </div>
+                  <hr class="my-4" />
                   <div class="row">
                     <div
-                      class="col-md-6"
-                      v-for="(product, index) in facilities"
+                      class="col-md-4 my-2"
+                      v-for="(product, index) in checkedfacilities"
                       :key="index"
                     >
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox mb-3">
-                          <input
-                            class="custom-control-input"
-                            :id="product"
-                            :value="product"
-                            name="product"
-                            type="checkbox"
-                            v-model="checkedfacilities"
-                          />
-                          <label class="custom-control-label" :for="product"
-                            ><span>{{ product }}</span></label
-                          >
-                        </div>
+                      <div class="col ml--2">
+                        <span class="text-primary">●</span>
+                        <small class="h2 card-title mb-0">{{product}}</small>
                       </div>
                     </div>
                   </div>
                 </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Description</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label">Description</label>
-                    <textarea
-                      rows="4"
-                      class="form-control"
-                      placeholder="A few words about house ..."
-                      v-model="description"
-                    >
-                    </textarea>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-success">Create</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -338,7 +122,7 @@
 
 <script>
 export default {
-  props: ["houseview","savedfacilities"],
+  props: ["houseview", "savedfacilities"],
   components: {},
   data() {
     return {
@@ -369,62 +153,9 @@ export default {
       ],
       checkedfacilities: this.savedfacilities,
     };
-  }, 
-//   created () {
-        
-//           this.title= this.houseview.title
-//       this.property_type= this.houseview.property_type
-//       this.property_name= this.houseview.property_name
-//       this.floor= this.houseview.floor
-//       this.this.bedroom= this.houseview.bedroom
-//       this.bathroom= this.houseview.bathroom
-//       this.parking= this.houseview.parking
-//       this.furnishing= this.houseview.furnishing
-//       this.rental= this.houseview.rental
-//       this.deposit= this.houseview.deposit
-//       this.address_line1= this.houseview.address_line1
-//       this.this.address_line2= this.houseview.address_line2
-//       this.postcode= this.houseview.postcode
-//       this.city= this.houseview.city
-//       this.state= this.houseview.state
-//       this.description= this.houseview.description
-//       this.state= this.houseview.state
-       
-//     },
-  computed: {},
-  methods: {
-    formSubmit(event) {
-      let houseData = {
-        title: this.title,
-        property_type: this.property_type,
-        property_name: this.property_name,
-        floor: this.floor,
-        bedroom: this.bedroom,
-        bathroom: this.bathroom,
-        parking: this.parking,
-        furnishing: this.furnishing,
-        rental: this.rental,
-        deposit: this.deposit,
-        address_line1: this.address_line1,
-        address_line2: this.address_line2,
-        postcode: this.postcode,
-        city: this.city,
-        state: this.state,
-        checkedfacilities: this.checkedfacilities,
-        description: this.description,
-      };
-      axios
-        .post("/updatehouse/"+this.houseview.house_id, houseData)
-        // .post("/meeting", data)
-        .then((response) => {
-          console.log("response", response);
-          location.href = '/listhouse';
-        })
-        .catch(function (error) {
-          console.log("response", error);
-        });
-    },
   },
+  computed: {},
+  methods: {},
 };
 </script>
 
