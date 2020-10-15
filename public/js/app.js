@@ -2277,8 +2277,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {},
   created: function created() {},
   data: function data() {
     var _ref;
@@ -2300,11 +2348,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       city: "",
       state: "",
       description: ""
-    }, _defineProperty(_ref, "state", ""), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", []), _ref;
+    }, _defineProperty(_ref, "state", ""), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", []), _defineProperty(_ref, "name", ""), _defineProperty(_ref, "alias", ""), _defineProperty(_ref, "sex", ""), _defineProperty(_ref, "sez", [{
+      date: null,
+      details: null
+    }]), _defineProperty(_ref, "images", []), _defineProperty(_ref, "maxImages", 5), _defineProperty(_ref, "addImage", "button.add-image"), _ref;
   },
   computed: {},
   methods: {
+    addNewRow: function addNewRow() {
+      // I changed to `this.sez.push` because `this.seziure` is `undefined`.
+      this.sez.push({
+        date: null,
+        details: null
+      });
+    },
+    addNewImage: function addNewImage(e) {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length < n) {
+        this.images.push("");
+      }
+
+      this.checkImages();
+    },
+    removeImage: function removeImage(index) {
+      this.images.splice(index, 1);
+      this.checkImages();
+    },
+    checkImages: function checkImages() {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length >= n) {
+        $(this.addImage, this.el).prop("disabled", true); // Disables the button.
+      } else {
+        $(this.addImage, this.el).prop("disabled", false); // Enables the button.
+      }
+    },
+    previewImage: function previewImage(index, e) {
+      var r = new FileReader(),
+          f = e.target.files[0];
+      r.addEventListener("load", function () {
+        $('[class~="images[' + index + ']-preview"]', this.el).html('<img src="' + r.result + '" class="thumbnail img-responsive">');
+      }, false);
+
+      if (f) {
+        r.readAsDataURL(f);
+      }
+    },
     formSubmit: function formSubmit(event) {
+      // https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
+      var vm = this;
+      var data = new FormData(e.target);
+      data.append('sez', this.sez);
+      data.append('name', this.name);
+      data.append('alias', this.alias);
+      data.append('sex', this.sex); // The `data` already contain the Signature and Recent Photograph images.
+      // Here we add the extra images as an array.
+
+      $('[class~="images[]"]', this.el).each(function (i) {
+        if (i > vm.maxImages - 1) {
+          return; // Max images reached.
+        }
+
+        data.append('images[' + i + ']', this.files[0]);
+      });
       var houseData = {
         title: this.title,
         property_type: this.property_type,
@@ -2324,10 +2431,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         checkedfacilities: this.checkedfacilities,
         description: this.description
       };
-      axios.post("/storehouse", houseData) // .post("/meeting", data)
+      axios.post("/storehousel", houseData) // .post("/meeting", data)
       .then(function (response) {
         console.log("response", response);
-        location.href = '/listhouse';
+        location.href = "/listhouse";
       })["catch"](function (error) {
         console.log("response", error);
       });
@@ -38457,10 +38564,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -39337,9 +39444,97 @@ var render = function() {
                         attrs: { type: "submit" }
                       },
                       [_vm._v("Create")]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "file", name: "photo", accept: "image/*" },
+                      on: {
+                        change: function($event) {
+                          return _vm.setPhotoFiles(
+                            $event.target.name,
+                            $event.target.files
+                          )
+                        }
+                      }
+                    })
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "list-group",
+                      attrs: { if: _vm.images.length }
+                    },
+                    _vm._l(_vm.images, function(f, index) {
+                      return _c(
+                        "li",
+                        { key: index, staticClass: "list-group-item" },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.removeImage(index, $event)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    ×\n                  "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "button success expand radius" },
+                            [
+                              _c(
+                                "label",
+                                { staticClass: "custom-file-upload" },
+                                [
+                                  _c("input", {
+                                    staticClass: "images[]",
+                                    attrs: { type: "file", accept: "image/*" },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.previewImage(index, $event)
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", {
+                            class: "images[" + index + "]-preview image-preview"
+                          })
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-link add-image",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.addNewImage($event)
+                        }
+                      }
+                    },
+                    [_vm._v("\n                Add Image\n              ")]
+                  )
+                ])
               ])
             ])
           ])
@@ -52749,7 +52944,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true& */ "./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true&");
+/* harmony import */ var _HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HouseCreate.vue?vue&type=template&id=abfeafd2& */ "./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&");
 /* harmony import */ var _HouseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HouseCreate.vue?vue&type=script&lang=js& */ "./resources/js/modules/house/HouseCreate.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -52761,11 +52956,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _HouseCreate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "abfeafd2",
+  null,
   null
   
 )
@@ -52791,19 +52986,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true& ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./HouseCreate.vue?vue&type=template&id=abfeafd2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/house/HouseCreate.vue?vue&type=template&id=abfeafd2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HouseCreate_vue_vue_type_template_id_abfeafd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

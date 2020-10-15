@@ -284,24 +284,28 @@
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group">
-                        
-                      </div>
+                      <div class="form-group"></div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6" v-for="(product, index) in facilities" :key="index">
+                    <div
+                      class="col-md-6"
+                      v-for="(product, index) in facilities"
+                      :key="index"
+                    >
                       <div class="form-group">
-                          <div class="custom-control custom-checkbox mb-3" >
-                            <input
-                                class="custom-control-input"
-                                :id="product"
-                                :value="product"
-                                name="product"
-                                type="checkbox"
-                                v-model="checkedfacilities"
-                            />
-                            <label class="custom-control-label" :for="product"><span>{{product}}</span></label>
+                        <div class="custom-control custom-checkbox mb-3">
+                          <input
+                            class="custom-control-input"
+                            :id="product"
+                            :value="product"
+                            name="product"
+                            type="checkbox"
+                            v-model="checkedfacilities"
+                          />
+                          <label class="custom-control-label" :for="product"
+                            ><span>{{ product }}</span></label
+                          >
                         </div>
                       </div>
                     </div>
@@ -323,7 +327,52 @@
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success">Create</button>
+                <input
+                  type="file"
+                  name="photo"
+                  accept="image/*"
+                  @change="
+                    setPhotoFiles($event.target.name, $event.target.files)
+                  "
+                />
               </form>
+
+              <div class="col-md-4">
+                <ul class="list-group" :if="images.length">
+                  <li
+                    class="list-group-item"
+                    v-for="(f, index) in images"
+                    :key="index"
+                  >
+                    <button
+                      class="close"
+                      @click.prevent="removeImage(index, $event)"
+                    >
+                      &times;
+                    </button>
+                    <div class="button success expand radius">
+                      <label class="custom-file-upload">
+                        <input
+                          type="file"
+                          class="images[]"
+                          accept="image/*"
+                          @change="previewImage(index, $event)"
+                        />
+                      </label>
+                    </div>
+                    <div
+                      :class="'images[' + index + ']-preview image-preview'"
+                    ></div>
+                  </li>
+                </ul>
+                <button
+                  class="btn btn-link add-image"
+                  @click.prevent="addNewImage"
+                >
+                  Add Image
+                </button>
+
+              </div>
             </div>
           </div>
         </div>
@@ -334,7 +383,6 @@
 
 <script>
 export default {
-  components: {},
   created() {},
   data() {
     return {
@@ -355,14 +403,118 @@ export default {
       state: "",
       description: "",
       state: "",
-      facilities: ["Refrigerator", "Cooker","Water filter", "Washing machine","Wardrobe", "Ceiling fan",],
+      facilities: [
+        "Refrigerator",
+        "Cooker",
+        "Water filter",
+        "Washing machine",
+        "Wardrobe",
+        "Ceiling fan",
+      ],
 
       checkedfacilities: [],
+
+      name: "",
+      alias: "",
+      sex: "",
+      sez: [
+        {
+          date: null,
+          details: null,
+        },
+      ],
+      // I removed `photo` and `sign` because (I think) the're not necessary.
+      // Add I added `images` so that we could easily add new images via Vue.
+      images: [],
+      maxImages: 5,
+      // Selector for the "Add Image" button. Try using (or you should use) ID
+      // instead; e.g. `button#add-image`. But it has to be a `button` element.
+      addImage: "button.add-image",
     };
   },
   computed: {},
   methods: {
+    addNewRow: function () {
+      // I changed to `this.sez.push` because `this.seziure` is `undefined`.
+      this.sez.push({
+        date: null,
+        details: null,
+      });
+    },
+
+    addNewImage: function (e) {
+      var n = this.maxImages || -1;
+      if (n && this.images.length < n) {
+        this.images.push("");
+      }
+      this.checkImages();
+    },
+
+    removeImage: function (index) {
+      this.images.splice(index, 1);
+      this.checkImages();
+    },
+
+    checkImages: function () {
+      var n = this.maxImages || -1;
+      if (n && this.images.length >= n) {
+        $(this.addImage, this.el).prop("disabled", true); // Disables the button.
+      } else {
+        $(this.addImage, this.el).prop("disabled", false); // Enables the button.
+      }
+    },
+
+    previewImage: function (index, e) {
+      var r = new FileReader(),
+        f = e.target.files[0];
+
+      r.addEventListener(
+        "load",
+        function () {
+          $('[class~="images[' + index + ']-preview"]', this.el).html(
+            '<img src="' + r.result + '" class="thumbnail img-responsive">'
+          );
+        },
+        false
+      );
+
+      if (f) {
+        r.readAsDataURL(f);
+      }
+    },
+
     formSubmit(event) {
+
+// https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
+ var vm = this;
+
+      var data = new FormData(e.target);
+      data.append('sez', this.sez);
+      data.append('name', this.name);
+      data.append('alias', this.alias);
+      data.append('sex', this.sex);
+
+      // The `data` already contain the Signature and Recent Photograph images.
+      // Here we add the extra images as an array.
+
+      $('[class~="images[]"]', this.el).each(function(i) {
+        if (i > vm.maxImages - 1) {
+          return; // Max images reached.
+        }
+
+        data.append('images[' + i + ']', this.files[0]);
+      });
+
+
+
+
+
+
+
+
+
+
+
       let houseData = {
         title: this.title,
         property_type: this.property_type,
@@ -383,11 +535,11 @@ export default {
         description: this.description,
       };
       axios
-        .post("/storehouse", houseData)
+        .post("/storehousel", houseData)
         // .post("/meeting", data)
         .then((response) => {
           console.log("response", response);
-          location.href = '/listhouse';
+          location.href = "/listhouse";
         })
         .catch(function (error) {
           console.log("response", error);
@@ -397,4 +549,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style></style>
