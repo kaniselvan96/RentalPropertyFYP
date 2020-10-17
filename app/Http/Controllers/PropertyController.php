@@ -51,6 +51,24 @@ class PropertyController extends Controller
         $request->status = $status;
         $request->save();
 
+        //update count
+        $pending = DB::table('tenancy_request')
+                ->where('status', 'Pending')
+                ->count();
+        $viewing = DB::table('tenancy_request')
+                ->where('status', 'Viewing')
+                ->count();
+        $accepted = DB::table('tenancy_request')
+                ->where('status', 'Accepted')
+                ->count();
+        $rejected = DB::table('tenancy_request')
+                ->where('status', 'Rejected')
+                ->count();
+        $request = [];
+        $request['pending']=$pending;
+        $request['viewing']=$viewing;
+        $request['accepted']=$accepted;
+        $request['rejected']=$rejected;
         return response()->json($request, 201);
     }
 

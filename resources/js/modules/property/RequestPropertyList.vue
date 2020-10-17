@@ -133,17 +133,10 @@ export default {
             .then((response) => {
                 console.log("response", response);
                 this.showAlert = true;
-            })
-            .catch(function (error) {
-                console.log("response", error);
-            });
-        },
-        changesMainStatus(){            
-            axios
-            .post("/requestpropertymainstatus", changeStatusData)
-            .then((response) => {
-                console.log("response", response);
-                this.showAlert = true;
+                this.pending =response.data.pending;
+                this.viewing =response.data.viewing;
+                this.accepted=response.data.accepted;
+                this.rejected=response.data.rejected;
             })
             .catch(function (error) {
                 console.log("response", error);
@@ -156,7 +149,10 @@ export default {
             .post("/requestpropertymainstatus")
             .then((response) => {
                 console.log("response", response);
-                
+                this.pending =response.data.pending;
+                this.viewing =response.data.viewing;
+                this.accepted=response.data.accepted;
+                this.rejected=response.data.rejected;
             })
             .catch(function (error) {
                 console.log("response", error);

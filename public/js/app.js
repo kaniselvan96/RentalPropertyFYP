@@ -3281,24 +3281,24 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/requestpropertystatus", changeStatusData).then(function (response) {
         console.log("response", response);
         _this.showAlert = true;
-      })["catch"](function (error) {
-        console.log("response", error);
-      });
-    },
-    changesMainStatus: function changesMainStatus() {
-      var _this2 = this;
-
-      axios.post("/requestpropertymainstatus", changeStatusData).then(function (response) {
-        console.log("response", response);
-        _this2.showAlert = true;
+        _this.pending = response.data.pending;
+        _this.viewing = response.data.viewing;
+        _this.accepted = response.data.accepted;
+        _this.rejected = response.data.rejected;
       })["catch"](function (error) {
         console.log("response", error);
       });
     }
   },
   mounted: function mounted() {
+    var _this2 = this;
+
     axios.post("/requestpropertymainstatus").then(function (response) {
       console.log("response", response);
+      _this2.pending = response.data.pending;
+      _this2.viewing = response.data.viewing;
+      _this2.accepted = response.data.accepted;
+      _this2.rejected = response.data.rejected;
     })["catch"](function (error) {
       console.log("response", error);
     });
@@ -76817,8 +76817,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
