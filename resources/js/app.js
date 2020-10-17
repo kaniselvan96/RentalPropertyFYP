@@ -47,15 +47,31 @@ Vue.component(
     "property-list",
     require("./modules/property/PropertyList.vue").default
 );
-Vue.filter('str_limit', function (value, size) {
-  if (!value) return '';
-  value = value.toString();
+Vue.component(
+    "request-property-list",
+    require("./modules/property/RequestPropertyList.vue").default
+);
 
-  if (value.length <= size) {
-    return value;
-  }
-  return value.substr(0, size) + '...';
+//limit amount word display
+Vue.filter('str_limit', function(value, size) {
+    if (!value) return '';
+    value = value.toString();
+
+    if (value.length <= size) {
+        return value;
+    }
+    return value.substr(0, size) + '...';
 });
+
+//formatting date
+import moment from 'moment'
+
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('DD-MMM-YYYY')
+    }
+});
+
 const app = new Vue({
     el: '#app',
 });

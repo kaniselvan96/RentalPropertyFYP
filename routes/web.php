@@ -34,3 +34,6 @@ Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'u
 //property
 Route::get('/property', [App\Http\Controllers\PropertyController::class, 'list'])->name('property');
 Route::post('/requestproperty', [App\Http\Controllers\PropertyController::class, 'requestproperty'])->name('requestproperty');
+Route::get('/requestpropertylist', [App\Http\Controllers\PropertyController::class, 'requestpropertylist'])->name('requestpropertylist');
+Route::post('/requestpropertystatus', [App\Http\Controllers\PropertyController::class, 'requestpropertystatus'])->name('requestpropertystatus');
+Route::post('/requestpropertymainstatus', [App\Http\Controllers\PropertyController::class, 'requestpropertymainstatus'])->name('requestpropertymainstatus');

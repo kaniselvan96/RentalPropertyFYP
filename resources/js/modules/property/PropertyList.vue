@@ -31,7 +31,7 @@
                       <div class="modal-content bg-gradient-warning">
                         <div class="modal-header">
                           <h6 class="modal-title" id="modal-title-notification">Your attention is required {{selectedID}}</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                             <span aria-hidden="true">×</span>
                           </button>
                         </div>
@@ -76,7 +76,6 @@
 </template>
 
 <script>
-var moment = require('moment');
 export default {
     props: ["houselist"],
   components: {},
@@ -96,8 +95,9 @@ export default {
             this.selectedID = house.house_id;
             this.landlord_id = house.landlord_id;
         },
+      
         formSubmit(event) {
-
+        
         let houseData = {
           professional: this.professional,
           move_date: this.move_date,
@@ -110,7 +110,7 @@ export default {
           // .post("/meeting", data)
           .then((response) => {
             console.log("response", response);
-            //location.href = "/listhouse";
+            this.$refs.closeVuemodal.click();
           })
           .catch(function (error) {
             console.log("response", error);
