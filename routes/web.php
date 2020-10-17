@@ -29,3 +29,8 @@ Route::get('/edithouse/{id}', [App\Http\Controllers\HomeController::class, 'edit
 Route::get('/createhouse', [App\Http\Controllers\HomeController::class, 'create'])->name('createhome');
 Route::post('/storehouse', [App\Http\Controllers\HomeController::class, 'store'])->name('storehome');
 Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('storehome');
+
+
+//property
+Route::get('/property', [App\Http\Controllers\PropertyController::class, 'list'])->name('property');
+Route::post('/requestproperty', [App\Http\Controllers\PropertyController::class, 'requestproperty'])->name('requestproperty');

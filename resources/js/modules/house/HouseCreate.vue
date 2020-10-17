@@ -357,7 +357,6 @@ export default {
       city: "",
       state: "",
       description: "",
-      state: "",
       facilities: [
         "Refrigerator",
         "Cooker",

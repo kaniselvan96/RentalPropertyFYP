@@ -43,7 +43,19 @@ Vue.component(
     "house-edit",
     require("./modules/house/HouseEdit.vue").default
 );
+Vue.component(
+    "property-list",
+    require("./modules/property/PropertyList.vue").default
+);
+Vue.filter('str_limit', function (value, size) {
+  if (!value) return '';
+  value = value.toString();
 
+  if (value.length <= size) {
+    return value;
+  }
+  return value.substr(0, size) + '...';
+});
 const app = new Vue({
     el: '#app',
 });
