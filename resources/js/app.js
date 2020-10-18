@@ -43,6 +43,8 @@ Vue.component(
     "house-edit",
     require("./modules/house/HouseEdit.vue").default
 );
+
+//Property
 Vue.component(
     "property-list",
     require("./modules/property/PropertyList.vue").default
@@ -51,6 +53,13 @@ Vue.component(
     "request-property-list",
     require("./modules/property/RequestPropertyList.vue").default
 );
+
+//tenant
+Vue.component(
+    "add-tenant",
+    require("./modules/tenant/AddTenant.vue").default
+);
+
 
 //limit amount word display
 Vue.filter('str_limit', function(value, size) {

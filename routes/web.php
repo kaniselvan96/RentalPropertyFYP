@@ -37,3 +37,7 @@ Route::post('/requestproperty', [App\Http\Controllers\PropertyController::class,
 Route::get('/requestpropertylist', [App\Http\Controllers\PropertyController::class, 'requestpropertylist'])->name('requestpropertylist');
 Route::post('/requestpropertystatus', [App\Http\Controllers\PropertyController::class, 'requestpropertystatus'])->name('requestpropertystatus');
 Route::post('/requestpropertymainstatus', [App\Http\Controllers\PropertyController::class, 'requestpropertymainstatus'])->name('requestpropertymainstatus');
+
+//tenant
+Route::get('/addtenant/{id}', [App\Http\Controllers\TenantController::class, 'addtenant'])->name('addtenant');
+Route::post('/storeaddtenant', [App\Http\Controllers\TenantController::class, 'storeaddtenant'])->name('storeaddtenant');

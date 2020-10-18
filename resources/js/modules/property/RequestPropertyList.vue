@@ -83,7 +83,7 @@
 											<h5 class="checklist-title mb-0">{{house.title}}</h5>
 											<small>{{house.name}}</small><br>
 											<small>{{house.email}}</small><br>
-											<small>{{house.email}}</small><br>
+											<small>{{house.phone}}</small><br>
 											<small>{{house.move_date | formatDate}}</small><br>
 											<small>{{house.professional}}</small><br>
 										</div>
@@ -95,6 +95,7 @@
 												<option>Accepted</option>
 												<option>Rejected</option>
 											</select>
+                                            <button class="btn btn-primary mt-2" type="button">Add Tenant</button>
 										</div>
 									</div>
 								</li>
