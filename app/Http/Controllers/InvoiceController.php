@@ -42,7 +42,7 @@ class InvoiceController extends Controller
     public function invoicecreate($id)
     {
         $tenantinfo = DB::table('tenants')
-            ->select('tenants.*', 'users.*', 'houses.*')
+            ->select('tenants.*', 'users.*', 'houses.*','tenants.rental AS tenant_rent')
             ->join('users', 'users.id', '=', 'tenants.renter_id')
             ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
             ->where('tenants.landlord_id', Auth::user()->id)

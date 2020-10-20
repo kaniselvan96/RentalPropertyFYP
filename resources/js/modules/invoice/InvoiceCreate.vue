@@ -184,7 +184,7 @@ import moment from 'moment'
                 rentcharge: [
                     {
                         description_charge: "Rent",
-                        amount: parseInt(this.tenantinfo.rental),
+                        amount: parseInt(this.tenantinfo.tenant_rent),
                         charge_date: moment().format('DD-MM-YYYY'),
                         status: "NEW",
                         charges_id: null,
@@ -202,7 +202,7 @@ import moment from 'moment'
                 home_address: "",
                 professional: this.tenantinfo.professional,
                 rental_unit: this.tenantinfo.address_line1 + " " + this.tenantinfo.address_line2,
-                rental: this.tenantinfo.rental,
+                rental: this.tenantinfo.tenant_rent,
                 deposit: this.tenantinfo.deposit,
                 due_on: "",
                 lease_expiration_date: this.tenantinfo.lease_expiration_date,

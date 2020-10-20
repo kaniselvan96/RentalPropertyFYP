@@ -3201,7 +3201,7 @@ __webpack_require__.r(__webpack_exports__);
       confirmchargelist: [],
       rentcharge: [{
         description_charge: "Rent",
-        amount: parseInt(this.tenantinfo.rental),
+        amount: parseInt(this.tenantinfo.tenant_rent),
         charge_date: moment__WEBPACK_IMPORTED_MODULE_0___default()().format('DD-MM-YYYY'),
         status: "NEW",
         charges_id: null
@@ -3217,7 +3217,7 @@ __webpack_require__.r(__webpack_exports__);
       home_address: "",
       professional: this.tenantinfo.professional,
       rental_unit: this.tenantinfo.address_line1 + " " + this.tenantinfo.address_line2,
-      rental: this.tenantinfo.rental,
+      rental: this.tenantinfo.tenant_rent,
       deposit: this.tenantinfo.deposit,
       due_on: "",
       lease_expiration_date: this.tenantinfo.lease_expiration_date,
@@ -79180,8 +79180,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\prithiviraj\Desktop\LARAVEL\Rent\rent2\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Adminson\Desktop\House\rent\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -18,9 +18,9 @@ class TenantController extends Controller
         ->join('users', 'users.id', '=', 'tenancy_request.renter_id')
         ->join('houses', 'houses.house_id', '=', 'tenancy_request.house_id')
         ->where('tenancy_request.landlord_id', Auth::user()->id)
-        ->where('tenancy_request.request_id', $id)
+        ->where('tenancy_request.house_id', $id)
         ->get();
-        // dd($addtenant[0]);
+        // dd($addtenant);
         $addtenant = $addtenant[0];
         return view('tenant.addtenant', compact('addtenant'));
     }
