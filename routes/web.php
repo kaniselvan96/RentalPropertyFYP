@@ -41,3 +41,8 @@ Route::post('/requestpropertymainstatus', [App\Http\Controllers\PropertyControll
 //tenant
 Route::get('/addtenant/{id}', [App\Http\Controllers\TenantController::class, 'addtenant'])->name('addtenant');
 Route::post('/storeaddtenant', [App\Http\Controllers\TenantController::class, 'storeaddtenant'])->name('storeaddtenant');
+
+//invoice
+Route::get('/invoicelist', [App\Http\Controllers\InvoiceController::class, 'invoicelist'])->name('invoicelist');
+Route::get('/invoicecreate/{id}', [App\Http\Controllers\InvoiceController::class, 'invoicecreate'])->name('invoicecreate');
+Route::post('/storeinvoice', [App\Http\Controllers\InvoiceController::class, 'storeinvoice'])->name('storeinvoice');

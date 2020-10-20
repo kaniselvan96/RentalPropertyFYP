@@ -16,7 +16,9 @@
 
                     {{ __('You are logged in!') }}
                     
-                    </br><a href="{{route('listhome')}}" class="btn btn-sm btn-info mr-4">View House</a>
+                    <br><a href="{{route('listhome')}}" class="btn btn-sm btn-info mr-4">View House</a> 
+                    <a href="{{route('requestpropertylist')}}" class="btn btn-sm btn-info mr-4">View Request</a>
+                    <a href="{{route('invoicelist')}}" class="btn btn-sm btn-info mr-4">View Invoice</a>
                 </div>
             </div>
         </div>

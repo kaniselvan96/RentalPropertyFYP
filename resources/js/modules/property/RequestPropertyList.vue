@@ -87,7 +87,17 @@
 											<small>{{house.move_date | formatDate}}</small><br>
 											<small>{{house.professional}}</small><br>
 										</div>
-										<div class="form-group my-0 left-width">
+										<div class="form-group my-0 left-width" v-if="house.tenant_status == 'Added'">
+                                            <label class="form-control-label" for="exampleFormControlSelect1">Status - Tenant Added</label>
+											<select class="form-control" id="exampleFormControlSelect1" v-model="house.request_status" @change="changesStatus(house)" disabled>
+												<option>Pending</option>
+												<option>Viewing</option>
+												<option>Accepted</option>
+												<option>Rejected</option>
+											</select>
+                                            <a v-bind:href="'/addtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">View Tenant</a>
+										</div>
+										<div class="form-group my-0 left-width" v-if="house.tenant_status != 'Added'">
 											<label class="form-control-label" for="exampleFormControlSelect1">Status</label>
 											<select class="form-control" id="exampleFormControlSelect1" v-model="house.request_status" @change="changesStatus(house)">
 												<option>Pending</option>
@@ -95,7 +105,7 @@
 												<option>Accepted</option>
 												<option>Rejected</option>
 											</select>
-                                            <button class="btn btn-primary mt-2" type="button">Add Tenant</button>
+                                            <a v-bind:href="'/addtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">Add Tenant</a>
 										</div>
 									</div>
 								</li>

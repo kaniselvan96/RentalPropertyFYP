@@ -25,51 +25,51 @@
         
         <!-- model -->
          
-                  <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                      
-                      <div class="modal-content bg-gradient-warning">
-                        <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-notification">Your attention is required {{selectedID}}</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
-                            <span aria-hidden="true">×</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="py-3">
-                             <form role="form" v-on:submit.prevent="formSubmit">
-                                <div class="form-group mb-3">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-property_type">Professional</label>
-                                        <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="professional"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-property_type">Move Date</label>
-                                        <input class="form-control" type="date" id="example-date-input" v-model="move_date">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-property_type">Duration</label>
-                                         <select class="form-control" id="state" v-model="duration">
-                                          <option value="1">1</option>
-                                          <option value="2">2</option>
-                                          <option value="3">3</option>
-                                          <option value="4">4</option>
-                                          <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-white">Send</button>
-                                    <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
-                                </div>
-                              </form>
+        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+          <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+            
+            <div class="modal-content bg-gradient-warning">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Your attention is required {{selectedID}}</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="py-3">
+                    <form role="form" v-on:submit.prevent="formSubmit">
+                      <div class="form-group mb-3">
+                          <div class="form-group">
+                              <label class="form-control-label" for="input-property_type">Professional</label>
+                              <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="professional"/>
                           </div>
-                        </div>
-                        
+                          <div class="form-group">
+                              <label class="form-control-label" for="input-property_type">Move Date</label>
+                              <input class="form-control" type="date" id="example-date-input" v-model="move_date">
+                          </div>
+                          <div class="form-group">
+                              <label class="form-control-label" for="input-property_type">Duration</label>
+                                <select class="form-control" id="state" v-model="duration">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                          </div>
                       </div>
-                    
-                    </div>
-                  </div>
+                      <div class="modal-footer">
+                          <button type="submit" class="btn btn-white">Send</button>
+                          <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+              
+            </div>
+          
+          </div>
+        </div>
           
     </div>
   </div>

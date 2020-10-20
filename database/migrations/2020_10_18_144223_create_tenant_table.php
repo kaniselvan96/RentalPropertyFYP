@@ -25,13 +25,13 @@ class CreateTenantTable extends Migration
             $table->unsignedBigInteger('landlord_id');
             $table->foreign('landlord_id')->references('id')->on('users');
              
-            $table->string('professional');
-            $table->string('rental');
-            $table->string('deposit');
-            $table->string('due_on');
-            $table->string('lease_start_date');
-            $table->string('lease_expiration_date');
-            $table->string('status');
+            $table->string('professional')->nullable();
+            $table->string('rental')->nullable();
+            $table->string('deposit')->nullable();
+            $table->string('due_on')->nullable();
+            $table->string('lease_start_date')->nullable();
+            $table->string('lease_expiration_date')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

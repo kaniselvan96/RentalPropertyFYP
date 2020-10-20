@@ -153,7 +153,7 @@ export default {
         due_on : this.due_on,
         lease_start_date : this.lease_start_date,
         lease_expiration_date : this.lease_expiration_date,
-
+        request_id : this.addtenant.request_id,
         house_id : this.addtenant.house_id,
         renter_id : this.addtenant.renter_id,
       };

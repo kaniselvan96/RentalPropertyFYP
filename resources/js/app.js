@@ -61,6 +61,17 @@ Vue.component(
 );
 
 
+//invoice
+Vue.component(
+    "invoice-list",
+    require("./modules/invoice/InvoiceList.vue").default
+);
+Vue.component(
+    "invoice-create",
+    require("./modules/invoice/InvoiceCreate.vue").default
+);
+
+
 //limit amount word display
 Vue.filter('str_limit', function(value, size) {
     if (!value) return '';

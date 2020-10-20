@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTenancyRequest extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTenancyRequest extends Migration
      */
     public function up()
     {
-        Schema::create('tenancy_request', function (Blueprint $table) {
-            $table->bigincrements('request_id');
-
+        Schema::create('invoices', function (Blueprint $table) {
+            $table->bigincrements('invoice_id');
+            
             $table->unsignedBigInteger('renter_id');
             $table->foreign('renter_id')->references('id')->on('users');
 
@@ -24,12 +24,15 @@ class CreateTenancyRequest extends Migration
 
             $table->unsignedBigInteger('landlord_id');
             $table->foreign('landlord_id')->references('id')->on('users');
-
-            $table->string('professional')->nullable();
-            $table->datetime('move_date')->nullable();
-            $table->string('duration')->nullable();
+             
+            $table->bigInteger('total')->nullable();
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
+            $table->string('reminder')->nullable();
+            $table->string('pay_date')->nullable();
             $table->string('status')->nullable();
-            $table->string('tenant_status')->nullable();
+            
+
             $table->timestamps();
         });
     }
@@ -41,6 +44,6 @@ class CreateTenancyRequest extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenancy_request');
+        Schema::dropIfExists('invoices');
     }
 }

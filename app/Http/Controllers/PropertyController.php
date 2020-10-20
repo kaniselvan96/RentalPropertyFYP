@@ -41,6 +41,7 @@ class PropertyController extends Controller
             'move_date' => $request['move_date'],
             'duration' => $request['duration'],
             'status' => 'Pending',
+            'tenant_status' => 'no',
         ]);
         return response()->json($request, 201);
     }

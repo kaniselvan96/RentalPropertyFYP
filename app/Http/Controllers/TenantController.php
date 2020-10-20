@@ -18,7 +18,7 @@ class TenantController extends Controller
         ->join('users', 'users.id', '=', 'tenancy_request.renter_id')
         ->join('houses', 'houses.house_id', '=', 'tenancy_request.house_id')
         ->where('tenancy_request.landlord_id', Auth::user()->id)
-        ->where('houses.house_id', $id)
+        ->where('tenancy_request.request_id', $id)
         ->get();
         // dd($addtenant[0]);
         $addtenant = $addtenant[0];
@@ -48,6 +48,11 @@ class TenantController extends Controller
             'renter_id' => $request['renter_id'],
             'landlord_id' => Auth::user()->id,
         ]);
+
+        $request = TenancyRequest::find($request['request_id']);
+        $request->tenant_status = "Added";
+        $request->save();
+
         return response()->json($tenant, 201);
     }
     
