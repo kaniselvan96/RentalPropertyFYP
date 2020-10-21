@@ -95,7 +95,7 @@
 												<option>Accepted</option>
 												<option>Rejected</option>
 											</select>
-                                            <a v-bind:href="'/addtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">View Tenant</a>
+                                            <a v-bind:href="'/viewtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">View Tenant</a>
 										</div>
 										<div class="form-group my-0 left-width" v-if="house.tenant_status != 'Added'">
 											<label class="form-control-label" for="exampleFormControlSelect1">Status</label>

@@ -16,7 +16,7 @@
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>
                         <button v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification">Interested</button> 
-                        <a v-bind:href="'/edithouse/'+ house.house_id" class="btn btn-sm btn-warning">More</a>
+                        <a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-warning">More</a>
                     </div>
                 </div>
             </div>

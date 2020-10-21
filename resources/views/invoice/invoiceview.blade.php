@@ -2,6 +2,6 @@
 @extends('layouts.app')
 @section('title', "Invoice -" . Auth::user()->user_type)
 @section('content')
-<invoice-list :houseList="{{json_encode($houseList)}}" :invoiceslist="{{json_encode($invoicesList)}}" :allsum="{{json_encode($allsum)}}"></invoice-list>
+<invoice-view :invoiceview="{{json_encode($invoiceview)}}" :chargelist="{{json_encode($chargelist)}}"></invoice-view>
 {{-- <invoice-list ></invoice-list> --}}
 @endsection

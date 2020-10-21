@@ -25,6 +25,7 @@ class CreateChargesTable extends Migration
             $table->bigInteger('amount')->nullable();
             $table->string('charge_date')->nullable();
             $table->string('status')->nullable();
+            $table->string('charge_month')->nullable();
             $table->string('description_charge')->nullable();
             
 

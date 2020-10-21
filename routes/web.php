@@ -40,9 +40,16 @@ Route::post('/requestpropertymainstatus', [App\Http\Controllers\PropertyControll
 
 //tenant
 Route::get('/addtenant/{id}', [App\Http\Controllers\TenantController::class, 'addtenant'])->name('addtenant');
+Route::get('/viewtenant/{id}', [App\Http\Controllers\TenantController::class, 'viewtenant'])->name('viewtenant');
 Route::post('/storeaddtenant', [App\Http\Controllers\TenantController::class, 'storeaddtenant'])->name('storeaddtenant');
 
 //invoice
 Route::get('/invoicelist', [App\Http\Controllers\InvoiceController::class, 'invoicelist'])->name('invoicelist');
 Route::get('/invoicecreate/{id}', [App\Http\Controllers\InvoiceController::class, 'invoicecreate'])->name('invoicecreate');
+Route::get('/invoiceview/{id}', [App\Http\Controllers\InvoiceController::class, 'invoiceview'])->name('invoiceview');
 Route::post('/storeinvoice', [App\Http\Controllers\InvoiceController::class, 'storeinvoice'])->name('storeinvoice');
+Route::post('/reminder', [App\Http\Controllers\InvoiceController::class, 'reminder'])->name('reminder');
+
+//tenant invoice 
+Route::get('/invoicetenantlist', [App\Http\Controllers\InvoiceController::class, 'invoicetenantlist'])->name('invoicetenantlist');
+Route::post('/payinvoice', [App\Http\Controllers\InvoiceController::class, 'payinvoice'])->name('payinvoice');

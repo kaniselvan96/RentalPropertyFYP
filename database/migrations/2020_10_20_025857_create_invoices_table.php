@@ -31,6 +31,8 @@ class CreateInvoicesTable extends Migration
             $table->string('reminder')->nullable();
             $table->string('pay_date')->nullable();
             $table->string('status')->nullable();
+            $table->string('pay_status')->nullable();
+            $table->string('paid_date')->nullable();
             
 
             $table->timestamps();

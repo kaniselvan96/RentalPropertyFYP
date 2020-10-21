@@ -88,6 +88,7 @@ class HomeController extends Controller
             'facilities' => json_encode($request['checkedfacilities']),
             'description' => $request['description'],
             'landlord_id' => Auth::user()->id,
+            'status' => "Available",
         ]);
         return response()->json($house, 201);
     }

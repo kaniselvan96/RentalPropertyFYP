@@ -24,6 +24,19 @@ class TenantController extends Controller
         $addtenant = $addtenant[0];
         return view('tenant.addtenant', compact('addtenant'));
     }
+    public function viewtenant($id)
+    {
+        $viewtenant = DB::table('tenants')
+        ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
+        ->join('users', 'users.id', '=', 'tenants.renter_id')
+        ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+        ->where('tenants.landlord_id', Auth::user()->id)
+        ->where('tenants.house_id', $id)
+        ->get();
+        // dd($viewtenant);
+        $viewtenant = $viewtenant[0];
+        return view('tenant.viewtenant', compact('viewtenant'));
+    }
     
     public function storeaddtenant(Request $request)
     {
@@ -52,6 +65,11 @@ class TenantController extends Controller
         $request = TenancyRequest::find($request['request_id']);
         $request->tenant_status = "Added";
         $request->save();
+
+
+        $house = House::find($request['house_id']);
+        $house->status = "Tenant";
+        $house->save();
 
         return response()->json($tenant, 201);
     }

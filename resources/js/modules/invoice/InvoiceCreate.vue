@@ -116,7 +116,7 @@
                                     <tbody>
                                         <tr v-for="(charge, key) in chargelistunbilled" :key="key">
                                             <td>{{charge.description_charge}}</td>
-                                            <td>{{charge.charge_date}}</td>
+                                            <td>{{charge.charge_date | formatDate}}</td>
                                             <td>{{charge.amount}}</td>
                                             <td><button class="btn btn-sm btn-info" @click="addexistcharge(charge)">Include</button></td>
                                         </tr>
@@ -211,13 +211,11 @@ import moment from 'moment'
             };
         },
         mounted() {
-            if(this.billedchargelist === undefined || this.billedchargelist.length == 0){
+            // if(this.billedchargelist === undefined || this.billedchargelist.length == 0){
                  this.confirmchargelist = this.rentcharge;
-            }else{
-                console.log("hi",this.billedchargelist.length)
-                this.confirmchargelist = this.billedchargelist;
-               
-            }
+            // }else{
+                // this.confirmchargelist = this.billedchargelist;
+            // }
             
         },
         computed: {
@@ -271,7 +269,7 @@ import moment from 'moment'
                     // .post("/meeting", data)
                     .then((response) => {
                     console.log("response", response);
-                    //location.href = "/listhouse";
+                    location.href = "/invoicelist";
                     })
                     .catch(function (error) {
                     console.log("response", error);

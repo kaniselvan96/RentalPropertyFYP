@@ -59,6 +59,10 @@ Vue.component(
     "add-tenant",
     require("./modules/tenant/AddTenant.vue").default
 );
+Vue.component(
+    "view-tenant",
+    require("./modules/tenant/ViewTenant.vue").default
+);
 
 
 //invoice
@@ -69,6 +73,14 @@ Vue.component(
 Vue.component(
     "invoice-create",
     require("./modules/invoice/InvoiceCreate.vue").default
+);
+Vue.component(
+    "invoice-view",
+    require("./modules/invoice/InvoiceView.vue").default
+);
+Vue.component(
+    "invoice-tenant-list",
+    require("./modules/invoice/InvoiceTenantList.vue").default
 );
 
 
@@ -89,6 +101,11 @@ import moment from 'moment'
 Vue.filter('formatDate', function(value) {
     if (value) {
         return moment(String(value)).format('DD-MMM-YYYY')
+    }
+});
+Vue.filter('formatmonth', function(value) {
+    if (value) {
+        return moment(String(value)).format('MMM-YYYY')
     }
 });
 
