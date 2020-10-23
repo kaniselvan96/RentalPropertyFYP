@@ -28,6 +28,18 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function myhouse()
+    {
+        $myhouse = DB::table('tenants')
+        ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
+        ->join('users', 'users.id', '=', 'tenants.renter_id')
+        ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+        ->where('tenants.renter_id', Auth::user()->id)
+        ->get();
+
+        // dd($myhouse);
+        return response()->json($myhouse, 201);
+    }
 
     function list() {
         $houseList = DB::table('houses')->get();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChargesTable extends Migration
+class CreateServiceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,20 @@ class CreateChargesTable extends Migration
      */
     public function up()
     {
-        Schema::create('charges', function (Blueprint $table) {
-            $table->bigincrements('charges_id');
+        Schema::create('services', function (Blueprint $table) {
+            $table->bigincrements('service_id');
             
-            $table->unsignedBigInteger('invoice_id');
+            $table->unsignedBigInteger('renter_id');
+            $table->foreign('renter_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('house_id');
             $table->foreign('house_id')->references('house_id')->on('houses');
-            $table->unsignedBigInteger('service_id')->nullable();
 
-            $table->bigInteger('amount')->nullable();
-            $table->string('charge_date')->nullable();
+            $table->unsignedBigInteger('landlord_id')->nullable();
+             
+            $table->string('service_title')->nullable();
+            $table->string('description')->nullable();
             $table->string('status')->nullable();
-            $table->string('charge_month')->nullable();
-            $table->string('description_charge')->nullable();
-            
-
             $table->timestamps();
         });
     }
@@ -40,6 +38,6 @@ class CreateChargesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('charges');
+        Schema::dropIfExists('service');
     }
 }

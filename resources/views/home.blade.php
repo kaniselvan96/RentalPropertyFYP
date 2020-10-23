@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -19,10 +19,13 @@
                     <br><a href="{{route('listhome')}}" class="btn btn-sm btn-info mr-4">View House</a> 
                     <a href="{{route('requestpropertylist')}}" class="btn btn-sm btn-info mr-4">View Request</a>
                     <a href="{{route('invoicelist')}}" class="btn btn-sm btn-info mr-4">View Invoice</a>
+                    <a href="{{route('servicelandlordlist')}}" class="btn btn-sm btn-info mr-4">View Service</a>
                     @else
                     <br>
                     <a href="{{route('property')}}" class="btn btn-sm btn-info mr-4">View House</a> 
                     <a href="{{route('invoicetenantlist')}}" class="btn btn-sm btn-info mr-4">View Invoice</a> 
+                    <a href="{{route('servicelist')}}" class="btn btn-sm btn-info mr-4">View Service</a> 
+                    <my-house></my-house>
                     @endif
                 </div>
             </div>

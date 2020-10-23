@@ -90,7 +90,7 @@
                                             <span v-if="invoices.payment_status == 'waiting'" class="badge badge-lg badge-info">Pending</span>
                                             <span v-if="invoices.payment_status == 'overdue'" class="badge badge-lg badge-warning">Overdue</span>
                                         </td>
-                                        <td><button v-if="invoices.payment_status != 'paid'" class="btn btn-sm btn-info" @click="sendreminder(invoices)">Send</button> <span v-if="invoices.reminder > 0">({{invoices.reminder}})</span></td>
+                                        <td><button v-if="invoices.payment_status == 'overdue'" class="btn btn-sm btn-info" @click="sendreminder(invoices)">Send</button> <span v-if="invoices.payment_status == 'overdue' && invoices.reminder > 0">({{invoices.reminder}})</span></td>
                                         <td>
                                             <a v-bind:href="'/invoiceview/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">View</a>
                                         </td>

@@ -43,6 +43,10 @@ Vue.component(
     "house-edit",
     require("./modules/house/HouseEdit.vue").default
 );
+Vue.component(
+    "my-house",
+    require("./modules/house/MyHouse.vue").default
+);
 
 //Property
 Vue.component(
@@ -81,6 +85,22 @@ Vue.component(
 Vue.component(
     "invoice-tenant-list",
     require("./modules/invoice/InvoiceTenantList.vue").default
+);
+
+//service
+Vue.component(
+    "service-list",
+    require("./modules/service/ServiceList.vue").default
+);
+Vue.component(
+    "service-create",
+    require("./modules/service/ServiceCreate.vue").default
+);
+
+//service
+Vue.component(
+    "service-landlord-list",
+    require("./modules/service/ServiceLandlordList.vue").default
 );
 
 

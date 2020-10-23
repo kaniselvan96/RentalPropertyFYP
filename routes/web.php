@@ -29,6 +29,7 @@ Route::get('/edithouse/{id}', [App\Http\Controllers\HomeController::class, 'edit
 Route::get('/createhouse', [App\Http\Controllers\HomeController::class, 'create'])->name('createhome');
 Route::post('/storehouse', [App\Http\Controllers\HomeController::class, 'store'])->name('storehome');
 Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('storehome');
+Route::post('/myhouse', [App\Http\Controllers\HomeController::class, 'myhouse'])->name('myhouse');
 
 
 //property
@@ -53,3 +54,14 @@ Route::post('/reminder', [App\Http\Controllers\InvoiceController::class, 'remind
 //tenant invoice 
 Route::get('/invoicetenantlist', [App\Http\Controllers\InvoiceController::class, 'invoicetenantlist'])->name('invoicetenantlist');
 Route::post('/payinvoice', [App\Http\Controllers\InvoiceController::class, 'payinvoice'])->name('payinvoice');
+
+//service tenant 
+Route::get('/servicelist', [App\Http\Controllers\ServiceController::class, 'servicelist'])->name('servicelist');
+Route::get('/servicecreate/{id}', [App\Http\Controllers\ServiceController::class, 'servicecreate'])->name('servicecreate');
+Route::post('/servicestore', [App\Http\Controllers\ServiceController::class, 'servicestore'])->name('servicestore');
+
+
+//service Landlord 
+Route::get('/servicelandlordlist', [App\Http\Controllers\ServiceController::class, 'servicelandlordlist'])->name('servicelandlordlist');
+// Route::get('/servicecreate/{id}', [App\Http\Controllers\ServiceController::class, 'servicecreate'])->name('servicecreate');
+Route::post('/servicechangestatus', [App\Http\Controllers\ServiceController::class, 'servicechangestatus'])->name('servicechangestatus');
