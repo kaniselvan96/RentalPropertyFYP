@@ -162,7 +162,7 @@ export default {
         // .post("/meeting", data)
         .then((response) => {
           console.log("response", response);
-        //  location.href = "/listhouse";
+         location.href = "/requestpropertylist";
         })
         .catch(function (error) {
           console.log("response", error);

@@ -30,6 +30,7 @@ Route::get('/createhouse', [App\Http\Controllers\HomeController::class, 'create'
 Route::post('/storehouse', [App\Http\Controllers\HomeController::class, 'store'])->name('storehome');
 Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('storehome');
 Route::post('/myhouse', [App\Http\Controllers\HomeController::class, 'myhouse'])->name('myhouse');
+Route::post('/getreminder', [App\Http\Controllers\HomeController::class, 'getreminder'])->name('getreminder');
 
 
 //property
@@ -47,9 +48,12 @@ Route::post('/storeaddtenant', [App\Http\Controllers\TenantController::class, 's
 //invoice
 Route::get('/invoicelist', [App\Http\Controllers\InvoiceController::class, 'invoicelist'])->name('invoicelist');
 Route::get('/invoicecreate/{id}', [App\Http\Controllers\InvoiceController::class, 'invoicecreate'])->name('invoicecreate');
+Route::get('/invoiceedit/{id}/{serviceid}', [App\Http\Controllers\InvoiceController::class, 'invoiceedit'])->name('invoiceedit');
 Route::get('/invoiceview/{id}', [App\Http\Controllers\InvoiceController::class, 'invoiceview'])->name('invoiceview');
 Route::post('/storeinvoice', [App\Http\Controllers\InvoiceController::class, 'storeinvoice'])->name('storeinvoice');
+Route::post('/editinvoice', [App\Http\Controllers\InvoiceController::class, 'editinvoice'])->name('editinvoice');
 Route::post('/reminder', [App\Http\Controllers\InvoiceController::class, 'reminder'])->name('reminder');
+
 
 //tenant invoice 
 Route::get('/invoicetenantlist', [App\Http\Controllers\InvoiceController::class, 'invoicetenantlist'])->name('invoicetenantlist');
@@ -63,5 +67,5 @@ Route::post('/servicestore', [App\Http\Controllers\ServiceController::class, 'se
 
 //service Landlord 
 Route::get('/servicelandlordlist', [App\Http\Controllers\ServiceController::class, 'servicelandlordlist'])->name('servicelandlordlist');
-// Route::get('/servicecreate/{id}', [App\Http\Controllers\ServiceController::class, 'servicecreate'])->name('servicecreate');
+Route::post('/servicecstorecharge', [App\Http\Controllers\ServiceController::class, 'servicecstorecharge'])->name('servicecstorecharge');
 Route::post('/servicechangestatus', [App\Http\Controllers\ServiceController::class, 'servicechangestatus'])->name('servicechangestatus');

@@ -7,7 +7,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card card-stats">
                         <!-- Card body -->
-                        <div class="card-body">
+                        <div class="card-body badge-info">
                             <div class="row">
                                 <div class="col">
                                 <h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
@@ -20,7 +20,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card card-stats">
                         <!-- Card body -->
-                        <div class="card-body">
+                        <div class="card-body badge-white">
                             <div class="row">
                                 <div class="col">
                                 <h5 class="card-title text-uppercase text-muted mb-0">Viewing</h5>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card card-stats">
+                    <div class="card card-stats badge-success">
                         <!-- Card body -->
                         <div class="card-body">
                             <div class="row">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card card-stats">
+                    <div class="card card-stats badge-warning">
                         <!-- Card body -->
                         <div class="card-body">
                             <div class="row">
@@ -105,7 +105,7 @@
 												<option>Accepted</option>
 												<option>Rejected</option>
 											</select>
-                                            <a v-bind:href="'/addtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">Add Tenant</a>
+                                            <a v-if="house.request_status == 'Accepted'" v-bind:href="'/addtenant/'+ house.house_id" class="btn btn-primary mt-2" type="button">Add Tenant</a>
 										</div>
 									</div>
 								</li>

@@ -35,7 +35,9 @@
                                     </div>
                                     <h4 class="mt-3 mb-1">{{service.title}}</h4>
                                     <h4 class="">#{{service.service_id}}</h4>
-                                    <p class="text-sm mb-0">{{service.state}}</p>
+                                    <div>
+                                        <p class="text-sm mb-0">{{service.state}} <span v-if="service.services_status == 'Accepted' && service.charge_amount > 0" class="h2 float-right mb-0">Cost : RM{{service.charge_amount}}</span></p>
+                                    </div>
                                 </div>
                                 <hr class="m-0 p-0" />
                             </div>
@@ -63,7 +65,7 @@
 </script>
 
 <style scoped>
-.height-30{
-height: 30px;
-}
+    .height-30 {
+        height: 30px;
+    }
 </style>

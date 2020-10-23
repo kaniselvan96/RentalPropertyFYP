@@ -62,14 +62,17 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-parking">Parking</label>
-                                                <input type="text" id="input-parking" class="form-control" placeholder="parking" v-model="parking" />
+                                                <label class="form-control-label" for="input-parking">Number Parking</label>
+                                                <input type="number" id="input-parking" class="form-control" placeholder="parking" v-model="parking" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-furnishing">Furnishing</label>
-                                                <input type="text" id="input-furnishing" class="form-control" placeholder="furnishing" v-model="furnishing" />
+                                                <select class="form-control" id="exampleFormControlSelect1" v-model="furnishing">
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

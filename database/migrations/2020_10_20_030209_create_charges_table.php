@@ -16,7 +16,7 @@ class CreateChargesTable extends Migration
         Schema::create('charges', function (Blueprint $table) {
             $table->bigincrements('charges_id');
             
-            $table->unsignedBigInteger('invoice_id');
+            $table->unsignedBigInteger('invoice_id')->nullable();
 
             $table->unsignedBigInteger('house_id');
             $table->foreign('house_id')->references('house_id')->on('houses');

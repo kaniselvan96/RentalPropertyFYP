@@ -18,9 +18,10 @@ class ServiceController extends Controller
     function servicelist()
     {
         $servicelist = DB::table('services')
-            ->select('services.*', 'users.*', 'houses.*', 'services.status AS services_status', 'services.description AS services_description')
+            ->select('services.*', 'users.*', 'houses.*', 'charges.amount AS charge_amount', 'services.status AS services_status', 'services.description AS services_description')
             ->join('users', 'users.id', '=', 'services.renter_id')
             ->join('houses', 'houses.house_id', '=', 'services.house_id')
+            ->leftjoin('charges', 'charges.service_id', '=', 'services.service_id')
             ->where('renter_id', Auth::user()->id)
             ->orderBy('service_id', 'desc')
             ->get();
@@ -29,9 +30,10 @@ class ServiceController extends Controller
     function servicelandlordlist()
     {
         $servicelandlordlist = DB::table('services')
-            ->select('services.*', 'users.*', 'houses.*', 'services.status AS services_status', 'services.description AS services_description')
+            ->select('services.*', 'users.*', 'houses.*', 'charges.amount AS charge_amount', 'services.status AS services_status', 'services.description AS services_description')
             ->join('users', 'users.id', '=', 'services.renter_id')
             ->join('houses', 'houses.house_id', '=', 'services.house_id')
+            ->leftjoin('charges', 'charges.service_id', '=', 'services.service_id')
             ->where('houses.landlord_id', Auth::user()->id)
             ->orderBy('service_id', 'desc')
             ->get();
@@ -51,7 +53,7 @@ class ServiceController extends Controller
         $counting['accepted'] = $accepted;
         $counting['rejected'] = $rejected;
         //  dd($counting);
-        return view('service.servicelandlordlist', compact('servicelandlordlist','counting'));
+        return view('service.servicelandlordlist', compact('servicelandlordlist', 'counting'));
     }
     function servicecreate($id)
     {
@@ -88,25 +90,19 @@ class ServiceController extends Controller
         $service = Service::find($request->service_id);
         $service->status = $services_status;
         $service->save();
-
-        //update count
-        // $pending = DB::table('tenancy_request')
-        //         ->where('status', 'Pending')
-        //         ->count();
-        // $viewing = DB::table('tenancy_request')
-        //         ->where('status', 'Viewing')
-        //         ->count();
-        // $accepted = DB::table('tenancy_request')
-        //         ->where('status', 'Accepted')
-        //         ->count();
-        // $rejected = DB::table('tenancy_request')
-        //         ->where('status', 'Rejected')
-        //         ->count();
-        // $request = [];
-        // $request['pending']=$pending;
-        // $request['viewing']=$viewing;
-        // $request['accepted']=$accepted;
-        // $request['rejected']=$rejected;
         return response()->json($service, 201);
+    }
+
+    public function servicecstorecharge(Request $request)
+    {
+        $charge = Charge::create([
+            'house_id' => $request['house_id'],
+            'service_id' => $request['service_id'],
+            'amount' => $request['amount'],
+            'charge_date' => $request['charge_date'],
+            'status' => "unbilled",
+            'description_charge' => $request['description_charge']
+        ]);
+        return response()->json($charge, 201);
     }
 }

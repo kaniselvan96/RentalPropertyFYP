@@ -7,6 +7,7 @@ use App\Models\House;
 use App\Models\Charge;
 use App\Models\Tenant;
 use App\Models\Invoice;
+use App\Models\Reminder;
 use Illuminate\Http\Request;
 use App\Models\TenancyRequest;
 use Illuminate\Support\Facades\DB;
@@ -88,6 +89,34 @@ class InvoiceController extends Controller
             ->get();
         // dd($billedChargeList);
         return view('invoice.invoicecreate', compact('tenantinfo', 'chargeList', "billedChargeList"));
+    }
+
+    public function invoiceedit($id,$serviceid)
+    {
+        $tenantinfo = DB::table('tenants')
+            ->select('tenants.*', 'users.*', 'houses.*', 'tenants.rental AS tenant_rent','invoices.month AS invoice_month','invoices.pay_date AS invoice_pay_date','invoice_id AS invoice_main_id')
+            ->join('users', 'users.id', '=', 'tenants.renter_id')
+            ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+            ->join('invoices', 'houses.house_id', '=', 'tenants.house_id')
+            ->where('invoices.invoice_id', $serviceid)
+            ->where('tenants.landlord_id', Auth::user()->id)
+            ->where('houses.house_id', $id)
+            ->get();
+        if (!empty($tenantinfo)) {
+            $tenantinfo = $tenantinfo[0];
+        }
+        $chargeList = DB::table('charges')
+            ->where('house_id', $id)
+            ->where('status', "unbilled")
+            ->get();
+
+        $billedChargeList = DB::table('charges')
+            ->where('house_id', $id)
+            ->where('invoice_id', $serviceid)
+            ->where('status', "Billed")
+            ->get();
+        // dd($billedChargeList);
+        return view('invoice.invoiceedit', compact('tenantinfo', 'chargeList', "billedChargeList"));
     }
 
     public function invoiceview($id)
@@ -197,11 +226,39 @@ class InvoiceController extends Controller
     {
         // dd($request->invoice_id);
         $int = (int) $request->reminder;
+
         $invoice = Invoice::find($request->invoice_id);
-
         $invoice->reminder = 1 + $int;
-
         $invoice->save();
+
+
+        $reminder = Reminder::create([
+            'invoice_id' => $invoice->invoice_id,
+            'house_id' => $request['house_id'],
+            'renter_id' => $request['renter_id'],
+            'landlord_id' => Auth::user()->id,
+        ]);
+
+        return response()->json($invoice, 201);
+    }
+    public function editinvoice(Request $request)
+    {
+        // dd($request->invoice_id);
+      
+        $invoice = Invoice::find($request->invoice_id);
+        $invoice->total = $request->total;
+        $invoice->save();
+
+        $chargelist = $request->confirmchargelist;
+// dd($chargelist);
+        foreach ($chargelist as $index => $charge) {
+            $editcharge = Charge::find($charge["charges_id"]);
+            $editcharge->description_charge = $charge["description_charge"];
+            $editcharge->charge_date = $charge["charge_date"];
+            $editcharge->amount = $charge["amount"];
+            $editcharge->save();
+        }
+        
         return response()->json($invoice, 201);
     }
 }

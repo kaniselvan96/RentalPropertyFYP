@@ -79,6 +79,10 @@ Vue.component(
     require("./modules/invoice/InvoiceCreate.vue").default
 );
 Vue.component(
+    "invoice-edit",
+    require("./modules/invoice/InvoiceEdit.vue").default
+);
+Vue.component(
     "invoice-view",
     require("./modules/invoice/InvoiceView.vue").default
 );

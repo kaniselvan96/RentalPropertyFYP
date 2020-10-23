@@ -7,21 +7,8 @@
         <div class="container-fluid">
             <!-- Table -->
             <div class="row justify-content-center">
-                <div class="col-xl-8">
+                <div class="col-xl-9">
                     <div class="row">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card card-stats">
-                                <!-- Card body -->
-                                <div class="card-body badge-success">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0">Paid</h5>
-                                            <span class="h2 font-weight-bold mb-0">{{allsum.paid}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
                                 <!-- Card body -->
@@ -35,6 +22,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-stats">
+                                <!-- Card body -->
+                                <div class="card-body badge-success">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Paid</h5>
+                                            <span class="h2 font-weight-bold mb-0">{{allsum.paid}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
                                 <!-- Card body -->
@@ -93,6 +94,7 @@
                                         <td><button v-if="invoices.payment_status == 'overdue'" class="btn btn-sm btn-info" @click="sendreminder(invoices)">Send</button> <span v-if="invoices.payment_status == 'overdue' && invoices.reminder > 0">({{invoices.reminder}})</span></td>
                                         <td>
                                             <a v-bind:href="'/invoiceview/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">View</a>
+                                            <a v-if="invoices.payment_status != 'paid'" v-bind:href="'/invoiceedit/'+ invoices.house_id+'/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">Edit</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -160,6 +162,8 @@
             sendreminder(data) {
                 let reminder = {
                     invoice_id: data.invoice_id,
+                    house_id: data.house_id,
+                    renter_id: data.renter_id,
                     reminder: data.reminder,
                 };
                 axios
@@ -175,6 +179,12 @@
 
                 // location.href = "/invoicecreate/"+this.selected_house_id;
             },
+            formSubmit(){
+            // this.selectedID = house.house_id;
+            // this.landlord_id = house.landlord_id;
+            
+            location.href = "/invoicecreate/"+this.selected_house_id;
+        },
         },
     };
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="main-content mt-1" id="panel">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-8 order-xl-1">
+                <div class="col-xl-12 order-xl-1">
                     <div class="card">
                         <div class="card-header">
                             <div class="row align-items-center">
@@ -36,7 +36,7 @@
                                         </h6>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <button type="submit" class="btn btn-success">Create</button>
+                                        <button type="submit" class="btn btn-success">Update</button>
                                     </div>
                                 </div>
 
@@ -45,13 +45,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-deposit">Billing month</label>
-                                                <input type="month" id="input-deposit" class="form-control" placeholder="Due On" v-model="billing_month" />
+                                                <input type="month" id="input-deposit" class="form-control" placeholder="Due On" v-model="billing_month" disabled/>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-deposit">Due Date</label>
-                                                <input type="date" id="input-deposit" class="form-control" placeholder="Due On" v-model="due_on" />
+                                                <input type="date" id="input-deposit" class="form-control" placeholder="Due On" v-model="due_on" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -77,6 +77,7 @@
                                             <th>charge description</th>
                                             <th>charge date</th>
                                             <th>amount</th>
+                                            <th>action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,11 +85,13 @@
                                             <td>{{charge.description_charge}}</td>
                                             <td>{{charge.charge_date}}</td>
                                             <td>{{charge.amount}}</td>
+                                            <td> <button @click="addToEditModel(charge,key)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-edit">Edit</button></td>
                                         </tr>
                                         <tr class="bg-warning">
                                             <td></td>
                                             <td>TOTAL</td>
                                             <td><b>{{total}}</b></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -133,7 +136,7 @@
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                     <div class="modal-content bg-success">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                            <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -157,6 +160,42 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-white">Add</button>
+                                        <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+                <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                    <div class="modal-content bg-success">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="py-3">
+                                <form role="form" v-on:submit.prevent="editcharge">
+                                    <div class="form-group mb-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-property_type">Charge Description</label>
+                                            <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="edit_description_charge" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-property_type">Charge Date</label>
+                                            <input class="form-control" type="date" id="example-date-input" v-model="edit_charge_date" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-property_type">Amount</label>
+                                            <input class="form-control" type="number" id="example-date-input" v-model="edit_amount" />
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-white">Edit</button>
                                         <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -204,17 +243,22 @@ import moment from 'moment'
                 rental_unit: this.tenantinfo.address_line1 + " " + this.tenantinfo.address_line2,
                 rental: this.tenantinfo.tenant_rent,
                 deposit: this.tenantinfo.deposit,
-                due_on: "",
+                billing_month: this.tenantinfo.invoice_month,
+                due_on: this.tenantinfo.invoice_pay_date,
                 lease_expiration_date: this.tenantinfo.lease_expiration_date,
 
-                chargelistunbilled : this.chargelist
+                chargelistunbilled : this.chargelist,
+                edit_description_charge : "",
+                edit_charge_date : "",
+                edit_amount : "",
+                edit_charge_key : "",
             };
         },
         mounted() {
             // if(this.billedchargelist === undefined || this.billedchargelist.length == 0){
-                 this.confirmchargelist = this.rentcharge;
+                //  this.confirmchargelist = this.rentcharge;
             // }else{
-                // this.confirmchargelist = this.billedchargelist;
+                this.confirmchargelist = this.billedchargelist;
             // }
             
         },
@@ -242,6 +286,18 @@ import moment from 'moment'
                 this.add_amount = 0;
                 this.add_charge_date = "";
             },
+            addToEditModel(data,key){
+                this.edit_charge_key = key,
+                this.edit_description_charge = data.description_charge,
+                this.edit_charge_date = moment(data.charge_date, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                this.edit_amount = data.amount
+            },
+            editcharge(){
+                this.confirmchargelist[this.edit_charge_key]['description_charge'] =  this.edit_description_charge;
+                this.confirmchargelist[this.edit_charge_key]['charge_date'] = moment(String(this.edit_charge_date)).format('DD-MM-YYYY');
+                this.confirmchargelist[this.edit_charge_key]['amount'] =  parseInt(this.edit_amount);
+                this.$refs.closeVuemodal.click();
+            },
 
             addexistcharge(existcharge) {
                 this.confirmchargelist.push({
@@ -259,17 +315,16 @@ import moment from 'moment'
                 let chargedata = {
                     confirmchargelist: this.confirmchargelist,
                     house_id: this.tenantinfo.house_id,
-                    renter_id: this.tenantinfo.renter_id,
+                    invoice_id: this.tenantinfo.invoice_main_id,
+
                     total: this.total,
-                    month: this.billing_month,
-                    pay_date: this.due_on,
                 };
                 axios
-                    .post("/storeinvoice", chargedata)
+                    .post("/editinvoice", chargedata)
                     // .post("/meeting", data)
                     .then((response) => {
                     console.log("response", response);
-                    location.href = "/invoicelist";
+                    // location.href = "/invoicelist";
                     })
                     .catch(function (error) {
                     console.log("response", error);

@@ -37,8 +37,19 @@ class HomeController extends Controller
         ->where('tenants.renter_id', Auth::user()->id)
         ->get();
 
-        // dd($myhouse);
         return response()->json($myhouse, 201);
+    }
+
+    public function getreminder()
+    {
+        $myreminder = DB::table('reminder')
+        ->join('invoices', 'invoices.invoice_id', '=', 'reminder.invoice_id')
+        ->join('houses', 'houses.house_id', '=', 'invoices.house_id')
+        ->where('reminder.renter_id', Auth::user()->id)
+        ->get();
+
+
+        return response()->json($myreminder, 201);
     }
 
     function list() {
