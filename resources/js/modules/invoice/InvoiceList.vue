@@ -80,7 +80,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(invoices, key) in invoiceslist" :key="key">
-                                        <td>{{invoices.invoice_id}}</td>
+                                        <td>#RF0{{invoices.invoice_id}}</td>
                                         <td>{{invoices.name}}</td>
                                         <td>{{invoices.title}}</td>
                                         <td>{{invoices.total}}</td>
@@ -107,9 +107,9 @@
 
             <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                    <div class="modal-content bg-gradient-warning">
+                    <div class="modal-content bg-success">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                            <h6 class="modal-title" id="modal-title-notification">Create Draft</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                                 <span aria-hidden="true">×</span>
                             </button>

@@ -61,7 +61,28 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="ic-number" class="col-md-4 col-form-label text-md-right">IC number</label>
+
+                            <div class="col-md-6">
+                                <input id="ic-number" type="number" class="form-control" name="ic_number" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Phone-number" class="col-md-4 col-form-label text-md-right">Phone number</label>
+
+                            <div class="col-md-6">
+                                <input id="Phone-number" type="number" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="address-number" class="col-md-4 col-form-label text-md-right">Address</label>
+
+                            <div class="col-md-6">
+                                <input id="address-number" type="text" class="form-control" name="address" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="user-type" class="col-md-4 col-form-label text-md-right">User Type</label>
 
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio mb-2">

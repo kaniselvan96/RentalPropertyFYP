@@ -11,7 +11,7 @@ class PropertyController extends Controller
 {
     function list()
     {
-        $houseList = DB::table('houses')->get();
+        $houseList = DB::table('houses')->where('status', 'Available')->get();
         return view('property.list', compact('houseList'));
     }
 

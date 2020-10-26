@@ -14,7 +14,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Invoice ID</h5>
-                                    <span class="h2 font-weight-bold mb-0">#RF{{invoices.invoice_id}}</span>
+                                    <span class="h2 font-weight-bold mb-0">#RF0{{invoices.invoice_id}}</span>
                                 </div>
                                 <div class="col-md-4">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Month</h5>

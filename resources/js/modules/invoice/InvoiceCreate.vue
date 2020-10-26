@@ -7,7 +7,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Add Tenant</h3>
+                                    <h3 class="mb-0">Create Invoice</h3>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                     <div class="modal-content bg-success">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                            <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                                 <span aria-hidden="true">×</span>
                             </button>

@@ -22,6 +22,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//public
+Route::post('/allhouse', [App\Http\Controllers\PublicController::class, 'allhouse'])->name('allhouse');
+Route::get('/publicviewhouse/{id}', [App\Http\Controllers\PublicController::class, 'publicviewhouse'])->name('publicviewhouse');
+
 //house
 Route::get('/listhouse', [App\Http\Controllers\HomeController::class, 'list'])->name('listhome');
 Route::get('/viewhouse/{id}', [App\Http\Controllers\HomeController::class, 'view'])->name('viewhome');
@@ -51,6 +55,7 @@ Route::get('/invoicecreate/{id}', [App\Http\Controllers\InvoiceController::class
 Route::get('/invoiceedit/{id}/{serviceid}', [App\Http\Controllers\InvoiceController::class, 'invoiceedit'])->name('invoiceedit');
 Route::get('/invoiceview/{id}', [App\Http\Controllers\InvoiceController::class, 'invoiceview'])->name('invoiceview');
 Route::post('/storeinvoice', [App\Http\Controllers\InvoiceController::class, 'storeinvoice'])->name('storeinvoice');
+Route::post('/storeinvoiceauto', [App\Http\Controllers\InvoiceController::class, 'storeinvoiceauto'])->name('storeinvoiceauto');
 Route::post('/editinvoice', [App\Http\Controllers\InvoiceController::class, 'editinvoice'])->name('editinvoice');
 Route::post('/reminder', [App\Http\Controllers\InvoiceController::class, 'reminder'])->name('reminder');
 

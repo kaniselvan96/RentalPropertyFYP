@@ -21,13 +21,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-title">Name</label>
-                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Name" v-model="name" disabled/>
+                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Name" v-model="name" disabled />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_type">Email</label>
-                                                <input type="text" id="input-property_type" class="form-control" placeholder="Property Type" v-model="email" disabled/>
+                                                <input type="text" id="input-property_type" class="form-control" placeholder="Property Type" v-model="email" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -35,13 +35,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_name">Phone Number</label>
-                                                <input type="text" id="input-property_name" class="form-control" placeholder="Phone Number" v-model="phone_number" disabled/>
+                                                <input type="text" id="input-property_name" class="form-control" placeholder="Phone Number" v-model="phone_number" disabled />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_name">Ic Number</label>
-                                                <input type="text" id="input-property_name" class="form-control" placeholder="Ic Number" v-model="ic_number" disabled/>
+                                                <input type="text" id="input-property_name" class="form-control" placeholder="Ic Number" v-model="ic_number" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_name">Home Address</label>
-                                                <input type="text" id="input-property_name" class="form-control" placeholder="Home Address" v-model="home_address" disabled/>
+                                                <input type="text" id="input-property_name" class="form-control" placeholder="Home Address" v-model="home_address" disabled />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -69,7 +69,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-rental">Rental Unit</label>
-                                                <input type="text" id="input-rental" class="form-control" placeholder="Rental Unit" v-model="rental_unit" disabled/>
+                                                <input type="text" id="input-rental" class="form-control" placeholder="Rental Unit" v-model="rental_unit" disabled />
                                             </div>
                                         </div>
                                     </div>
@@ -117,59 +117,88 @@
 </template>
 
 <script>
-export default {
-    props: ["addtenant"],
-  created() {},
-  data() {
-    return {
-        name : this.addtenant.name,
-        email : this.addtenant.email,
-        phone_number : this.addtenant.phone,
-        ic_number : "",
-        home_address : "",
-        professional : this.addtenant.professional,
-        rental_unit : this.addtenant.address_line1 + ' ' +this.addtenant.address_line2,
-        rental : this.addtenant.rental,
-        deposit : this.addtenant.deposit,
-        due_on : "",
-        lease_start_date : "",
-        lease_expiration_date : "",
-    };
-  },
-  computed: {},
-  methods: {
-    formSubmit(event) {
+    import moment from "moment";
+    export default {
+        props: ["addtenant"],
+        created() {},
+        data() {
+            return {
+                name: this.addtenant.name,
+                email: this.addtenant.email,
+                phone_number: this.addtenant.phone,
+                ic_number: "",
+                home_address: "",
+                professional: this.addtenant.professional,
+                rental_unit: this.addtenant.address_line1 + " " + this.addtenant.address_line2,
+                rental: this.addtenant.rental,
+                deposit: this.addtenant.deposit,
+                due_on: "",
+                lease_start_date: "",
+                lease_expiration_date: "",
+                rentcharge: [
+                    {
+                        description_charge: "Rent",
+                        amount: parseInt(this.addtenant.rental),
+                        charge_date: moment().format("DD-MM-YYYY"),
+                        status: "NEW",
+                        charges_id: null,
+                    },
+                ],
+            };
+        },
+        computed: {},
+        methods: {
+            formSubmit(event) {
+                let houseData = {
+                    name: this.name,
+                    email: this.email,
+                    phone_number: this.phone_number,
+                    ic_number: this.ic_number,
+                    home_address: this.home_address,
+                    professional: this.professional,
+                    rental_unit: this.rental_unit,
+                    rental: this.rental,
+                    deposit: this.deposit,
+                    due_on: this.due_on,
+                    lease_start_date: this.lease_start_date,
+                    lease_expiration_date: this.lease_expiration_date,
+                    request_id: this.addtenant.request_id,
+                    house_id: this.addtenant.house_id,
+                    renter_id: this.addtenant.renter_id,
+                };
+                axios
+                    .post("/storeaddtenant", houseData)
+                    // .post("/meeting", data)
+                    .then((response) => {
+                        console.log("response", response);
+                        //  location.href = "/requestpropertylist";
 
-      let houseData = {
-        name : this.name,
-        email : this.email,
-        phone_number : this.phone_number,
-        ic_number : this.ic_number,
-        home_address : this.home_address,
-        professional : this.professional,
-        rental_unit : this.rental_unit,
-        rental : this.rental,
-        deposit : this.deposit,
-        due_on : this.due_on,
-        lease_start_date : this.lease_start_date,
-        lease_expiration_date : this.lease_expiration_date,
-        request_id : this.addtenant.request_id,
-        house_id : this.addtenant.house_id,
-        renter_id : this.addtenant.renter_id,
-      };
-      axios
-        .post("/storeaddtenant", houseData)
-        // .post("/meeting", data)
-        .then((response) => {
-          console.log("response", response);
-         location.href = "/requestpropertylist";
-        })
-        .catch(function (error) {
-          console.log("response", error);
-        });
-    },
-  },
-};
+                        let chargedata = {
+                            confirmchargelist: this.rentcharge,
+                            house_id: this.addtenant.house_id,
+                            renter_id: this.addtenant.renter_id,
+                            total: parseInt(this.addtenant.rental),
+                            month: "",
+                            pay_date: moment(this.due_on).format(),
+                        };
+                        axios
+                            .post("/storeinvoiceauto", chargedata)
+                            // .post("/meeting", data)
+                            .then((response) => {
+                                console.log("response", response);
+                                location.href = "/requestpropertylist";
+                            })
+                            .catch(function (error) {
+                                console.log("response", error);
+                            });
+
+                    })
+                    .catch(function (error) {
+                        console.log("response", error);
+                    });
+            },
+        },
+    };
 </script>
 
 <style></style>

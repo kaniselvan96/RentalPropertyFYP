@@ -100,7 +100,7 @@
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                     <div class="modal-content bg-success">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                            <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                                 <span aria-hidden="true">×</span>
                             </button>

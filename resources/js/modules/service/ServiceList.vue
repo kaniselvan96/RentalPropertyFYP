@@ -8,15 +8,15 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Service List</h3>
+                                    <h3 class="mb-0">Service List <span class="text-sm text-gray" v-if="!servicelist.length"> - [No House to create service] </span></h3>
                                 </div>
-                                <div class="col-4 text-right">
+                                <div class="col-4 text-right" v-if="servicelist.length">
                                     <a v-bind:href="'/servicecreate/'+ servicelist[0].house_id" class="btn btn-primary">Create</a>
                                 </div>
                             </div>
                         </div>
                         <!-- Card body -->
-                        <div class="card-body p-0">
+                        <div class="card-body p-0" v-if="servicelist.length">
                             <!-- List group -->
                             <div class="list-group list-group-flush" v-for="(service, key) in servicelist" :key="key">
                                 <div href="#" class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4">

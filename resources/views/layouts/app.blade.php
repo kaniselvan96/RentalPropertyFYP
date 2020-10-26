@@ -26,16 +26,25 @@
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/argon.css') }}" rel="stylesheet">
+    <style>
+    .ct-navbar{
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        background-color: #5e72e4;
+        box-shadow: rgba(116,129,141,.1) 0 1px 1px 0;
+    }
+        </style>
     @yield('style')
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-horizontal navbar-expand navbar-dark flex-row align-items-md-center ct-navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -59,6 +68,18 @@
                                 </li>
                             @endif
                         @else
+                        @if (Auth::user()->user_type == "landlord")
+                    <br>
+                     <li class="nav-item"><a href="{{route('listhome')}}" class="nav-link">House</a> </li>
+                     <li class="nav-item"><a href="{{route('requestpropertylist')}}" class="nav-link">Request</a></li>
+                     <li class="nav-item"><a href="{{route('invoicelist')}}" class="nav-link">Invoice</a></li>
+                     <li class="nav-item"><a href="{{route('servicelandlordlist')}}" class="nav-link">Service</a></li>
+                    @else
+                    <br>
+                     <li class="nav-item"><a href="{{route('property')}}" class="nav-link">House</a> </li>
+                     <li class="nav-item"><a href="{{route('invoicetenantlist')}}" class="nav-link">Invoice</a> </li>
+                     <li class="nav-item"><a href="{{route('servicelist')}}" class="nav-link">Service</a> </li>
+                    @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

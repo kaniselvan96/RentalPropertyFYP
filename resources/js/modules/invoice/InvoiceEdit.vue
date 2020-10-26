@@ -7,7 +7,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Add Tenant</h3>
+                                    <h3 class="mb-0">Edit Invoice [#RF0{{invoice_id}}]</h3>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                     <div class="modal-content bg-success">
                         <div class="modal-header">
                             <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodaladd">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -147,15 +147,15 @@
                                     <div class="form-group mb-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Charge Description</label>
-                                            <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="add_description_charge" />
+                                            <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="add_description_charge" required/>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Charge Date</label>
-                                            <input class="form-control" type="date" id="example-date-input" v-model="add_charge_date" />
+                                            <input class="form-control" type="date" id="example-date-input" v-model="add_charge_date" required/>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Amount</label>
-                                            <input class="form-control" type="number" id="example-date-input" v-model="add_amount" />
+                                            <input class="form-control" type="number" id="example-date-input" v-model="add_amount" required/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -172,7 +172,7 @@
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                     <div class="modal-content bg-success">
                         <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Add Charge</h6>
+                            <h6 class="modal-title" id="modal-title-edit">Add Charge</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                                 <span aria-hidden="true">×</span>
                             </button>
@@ -183,15 +183,15 @@
                                     <div class="form-group mb-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Charge Description</label>
-                                            <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="edit_description_charge" />
+                                            <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="edit_description_charge" required/>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Charge Date</label>
-                                            <input class="form-control" type="date" id="example-date-input" v-model="edit_charge_date" />
+                                            <input class="form-control" type="date" id="example-date-input" v-model="edit_charge_date" required/>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Amount</label>
-                                            <input class="form-control" type="number" id="example-date-input" v-model="edit_amount" />
+                                            <input class="form-control" type="number" id="example-date-input" v-model="edit_amount" required/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -234,6 +234,7 @@ import moment from 'moment'
                 add_charge_date: "",
 
                 billing_month: "",
+                invoice_id: this.tenantinfo.invoice_main_id,
                 name: this.tenantinfo.name,
                 email: this.tenantinfo.email,
                 phone_number: this.tenantinfo.phone,
@@ -280,11 +281,12 @@ import moment from 'moment'
                     status: "NEW",
                     charges_id: null,
                 });
-                this.$refs.closeVuemodal.click();
+                
 
                 this.add_description_charge = "";
                 this.add_amount = 0;
                 this.add_charge_date = "";
+                this.$refs.closeVuemodaladd.click();
             },
             addToEditModel(data,key){
                 this.edit_charge_key = key,
@@ -324,7 +326,7 @@ import moment from 'moment'
                     // .post("/meeting", data)
                     .then((response) => {
                     console.log("response", response);
-                    // location.href = "/invoicelist";
+                    location.href = "/invoicelist";
                     })
                     .catch(function (error) {
                     console.log("response", error);

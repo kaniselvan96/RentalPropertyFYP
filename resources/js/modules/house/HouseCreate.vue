@@ -25,13 +25,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-title">Title</label>
-                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Title" v-model="title" />
+                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Title" v-model="title" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_type">Property Type</label>
-                                                <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="property_type" />
+                                                <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="property_type" required />
                                             </div>
                                         </div>
                                     </div>
@@ -39,37 +39,37 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-property_name">Property Name</label>
-                                                <input type="text" id="input-property_name" class="form-control" placeholder="property_name" v-model="property_name" />
+                                                <input type="text" id="input-property_name" class="form-control" placeholder="property_name" v-model="property_name" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-floor">Floor</label>
-                                                <input type="text" id="input-floor" class="form-control" placeholder="floor" v-model="floor" />
+                                                <input type="text" id="input-floor" class="form-control" placeholder="floor" v-model="floor" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-bedroom">Bedroom</label>
-                                                <input type="text" id="input-bedroom" class="form-control" placeholder="bedroom" v-model="bedroom" />
+                                                <input type="text" id="input-bedroom" class="form-control" placeholder="bedroom" v-model="bedroom" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-bathroom">Bathroom</label>
-                                                <input type="text" id="input-bathroom" class="form-control" placeholder="bathroom" v-model="bathroom" />
+                                                <input type="text" id="input-bathroom" class="form-control" placeholder="bathroom" v-model="bathroom" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-parking">Number Parking</label>
-                                                <input type="number" id="input-parking" class="form-control" placeholder="parking" v-model="parking" />
+                                                <input type="number" id="input-parking" class="form-control" placeholder="parking" v-model="parking" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-furnishing">Furnishing</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" v-model="furnishing">
+                                                <select class="form-control" id="exampleFormControlSelect1" v-model="furnishing" required>
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
@@ -87,13 +87,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-rental">Rental</label>
-                                                <input type="text" id="input-rental" class="form-control" placeholder="rental" v-model="rental" />
+                                                <input type="text" id="input-rental" class="form-control" placeholder="rental" v-model="rental" required />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-deposit">Deposit</label>
-                                                <input type="text" id="input-deposit" class="form-control" placeholder="deposit" v-model="deposit" />
+                                                <input type="text" id="input-deposit" class="form-control" placeholder="deposit" v-model="deposit" required />
                                             </div>
                                         </div>
                                     </div>

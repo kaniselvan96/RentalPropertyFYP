@@ -15,8 +15,12 @@
                     <div class="card-body">
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>
-                        <button v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification">Interested</button> 
-                        <a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-warning">More</a>
+                     
+                        <button v-if="islogin > 0" v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification">Interested</button> 
+                     
+                        <a v-if="islogin == 0" v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-info">Interested</a>
+                      
+                        <a v-bind:href="'/publicviewhouse/'+ house.house_id" class="btn btn-sm btn-warning">More</a>
                     </div>
                 </div>
             </div>
@@ -30,7 +34,7 @@
             
             <div class="modal-content bg-success">
               <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-notification">Yes, I'm Interested</h6>
+                <h6 class="modal-title" id="modal-title-notification"> {{selectedID}}</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                   <span aria-hidden="true">×</span>
                 </button>
@@ -77,7 +81,7 @@
 
 <script>
 export default {
-    props: ["houselist"],
+  props:["islogin"],
   components: {},
   created() {},
   data() {
@@ -86,10 +90,25 @@ export default {
       move_date:"",
       selectedID:"",
       duration: "",
-      landlord_id: ""
+      landlord_id: "",
+      houselist: ""
     };
   },
   computed: {},
+   mounted() {
+            axios
+                .post("/allhouse")
+                // .post("/meeting", data)
+                .then((response) => {
+                    console.log("response", response);
+                    this.houselist = response["data"];
+                })
+                .catch(function (error) {
+                    console.log("response", error);
+                });
+
+
+        },
   methods: {
         addToModel(house){
             this.selectedID = house.house_id;

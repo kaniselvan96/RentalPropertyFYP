@@ -7,7 +7,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Tenant Invoice</h3>
+                                    <h3 class="mb-0">Tenant Invoice [#RF0{{invoice_id}}]</h3>
                                 </div>
                             </div>
                         </div>
@@ -94,6 +94,7 @@ import moment from 'moment'
         data() {
             return {
 
+                invoice_id: this.invoiceview.invoice_id,
                 billing_month: this.invoiceview.month,
                 name: this.invoiceview.name,
                 email: this.invoiceview.email,

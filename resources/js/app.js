@@ -47,6 +47,10 @@ Vue.component(
     "my-house",
     require("./modules/house/MyHouse.vue").default
 );
+Vue.component(
+    "all-house",
+    require("./modules/house/AllHouse.vue").default
+);
 
 //Property
 Vue.component(

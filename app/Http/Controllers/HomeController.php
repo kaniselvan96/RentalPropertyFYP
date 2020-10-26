@@ -40,6 +40,7 @@ class HomeController extends Controller
         return response()->json($myhouse, 201);
     }
 
+
     public function getreminder()
     {
         $myreminder = DB::table('reminder')
