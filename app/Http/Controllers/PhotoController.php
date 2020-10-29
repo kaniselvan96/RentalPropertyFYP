@@ -2,84 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\House;
 use Illuminate\Http\Request;
+use App\Models\House;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\TenancyRequest;
+use App\Models\Tenant;
+use App\Models\Photo;
 
 class PhotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function photohouse($id)
     {
-        //
+        $houseView = DB::table('houses')->where('house_id', $id)->first();
+        $saveimages = DB::table('houses')->where('house_id', $id)->first();
+
+        $saveimages = DB::table('houses')
+        ->join('photos', 'photos.house_id', '=', 'houses.house_id')
+        ->where('houses.house_id', $id)
+        ->get();
+
+        return view('photo.housephoto', compact('houseView', 'saveimages'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function photostore(Request $request)
     {
-        //
+       
+        $input=$request->all();
+        $images=array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $name=$file->getClientOriginalName();
+                // dd( $name);
+                $file->move('images',$name);
+                $images[]=$name;
+                $photo = Photo::insert( [
+                    'photolink'=>  $name,
+                    'house_id' =>$input['house_id'],
+                    //you can put other insertion here
+                ]);
+            }
+        }
+       
+    
+        return response()->json($photo, 201);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function photoremove(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
-     */
-    public function show(House $house)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(House $house)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, House $house)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\House  $house
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(House $house)
-    {
-        //
+        $shark = Photo::find($request->photo_id);
+        $shark->delete();
+       
+    
+        return response()->json($shark, 201);
     }
 }

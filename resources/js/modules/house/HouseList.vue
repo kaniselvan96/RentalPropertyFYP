@@ -42,6 +42,7 @@
                     <td>
                       <a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-info mr-4">View</a> 
                       <a v-bind:href="'/edithouse/'+ house.house_id" class="btn btn-sm btn-warning mr-4">Edit</a>
+                      <a v-bind:href="'/photohouse/'+ house.house_id" class="btn btn-sm btn-warning mr-4">Photo</a>
                       <a v-if="house.status == 'Tenant'" v-bind:href="'/viewtenant/'+ house.house_id" class="btn btn-sm btn-success mr-4">View Tenant</a>
                     </td>
                   </tr>

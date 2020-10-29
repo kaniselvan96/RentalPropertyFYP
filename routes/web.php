@@ -36,6 +36,10 @@ Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'u
 Route::post('/myhouse', [App\Http\Controllers\HomeController::class, 'myhouse'])->name('myhouse');
 Route::post('/getreminder', [App\Http\Controllers\HomeController::class, 'getreminder'])->name('getreminder');
 
+//photo
+Route::get('/photohouse/{id}', [App\Http\Controllers\PhotoController::class, 'photohouse'])->name('photohouse');
+Route::post('/photostore', [App\Http\Controllers\PhotoController::class, 'photostore'])->name('photostore');
+Route::post('/photoremove', [App\Http\Controllers\PhotoController::class, 'photoremove'])->name('photoremove');
 
 //property
 Route::get('/property', [App\Http\Controllers\PropertyController::class, 'list'])->name('property');

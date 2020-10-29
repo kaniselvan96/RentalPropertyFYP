@@ -73,6 +73,17 @@
                                                                     <h1 class="card-title text-uppercase  mb-0">Total Amount</h1>
                                     <h1 class="font-weight-bold mb-0">RM {{currentamount}}</h1>
                                 </div>
+                                <label class="form-control-label" for="input-furnishing">Choose Bank</label>
+                                                <select class="form-control" id="exampleFormControlSelect1" v-model="furnishing" required>
+                                                    <option>Affin Bank</option>
+                                                    <option>Agrobank</option>
+                                                    <option>AmBank</option>
+                                                    <option>Bank Simpanan Nasional</option>
+                                                    <option>CIMB</option>
+                                                    <option>HSBC Bank</option>
+                                                    <option>Maybank</option>
+                                                    <option>Public Bank</option>
+                                                </select>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-white" @click="paynow()">Pay</button>
                                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>

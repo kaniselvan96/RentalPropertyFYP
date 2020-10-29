@@ -110,6 +110,11 @@ Vue.component(
     "service-landlord-list",
     require("./modules/service/ServiceLandlordList.vue").default
 );
+//photo
+Vue.component(
+    "house-photo",
+    require("./modules/photo/HousePhoto.vue").default
+);
 
 
 //limit amount word display

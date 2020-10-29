@@ -11,7 +11,7 @@
 
             <div class="col-lg-3" v-for="(house, key) in houselist" :key="key">
                 <div class="card">
-                    <img class="card-img-top" v-bind:src="'/images/img-1-1000x600.jpg'" alt="Image placeholder">
+                    <img class="card-img-top" v-bind:src="'/images/'+ myhousephoto[key].photolink" alt="Image placeholder">
                     <div class="card-body">
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>
@@ -91,7 +91,8 @@ export default {
       selectedID:"",
       duration: "",
       landlord_id: "",
-      houselist: ""
+      houselist: "",
+      myhousephoto: ""
     };
   },
   computed: {},
@@ -101,7 +102,8 @@ export default {
                 // .post("/meeting", data)
                 .then((response) => {
                     console.log("response", response);
-                    this.houselist = response["data"];
+                    this.houselist = response["data"]["myhouse"];
+                    this.myhousephoto = response["data"]["myhousephoto"];
                 })
                 .catch(function (error) {
                     console.log("response", error);
@@ -141,4 +143,12 @@ export default {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    border-top-left-radius: calc(.375rem - 1px);
+    border-top-right-radius: calc(.375rem - 1px);
+}
+</style>
+

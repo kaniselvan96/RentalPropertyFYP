@@ -31,24 +31,22 @@ class HomeController extends Controller
     public function myhouse()
     {
         $myhouse = DB::table('tenants')
-        ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
-        ->join('users', 'users.id', '=', 'tenants.renter_id')
-        ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
-        ->where('tenants.renter_id', Auth::user()->id)
-        ->get();
+            ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
+            ->join('users', 'users.id', '=', 'tenants.renter_id')
+            ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+            ->where('tenants.renter_id', Auth::user()->id)
+            ->get();
 
         return response()->json($myhouse, 201);
     }
 
-
     public function getreminder()
     {
         $myreminder = DB::table('reminder')
-        ->join('invoices', 'invoices.invoice_id', '=', 'reminder.invoice_id')
-        ->join('houses', 'houses.house_id', '=', 'invoices.house_id')
-        ->where('reminder.renter_id', Auth::user()->id)
-        ->get();
-
+            ->join('invoices', 'invoices.invoice_id', '=', 'reminder.invoice_id')
+            ->join('houses', 'houses.house_id', '=', 'invoices.house_id')
+            ->where('reminder.renter_id', Auth::user()->id)
+            ->get();
 
         return response()->json($myreminder, 201);
     }
@@ -62,14 +60,21 @@ class HomeController extends Controller
     {
         $houseView = DB::table('houses')->where('house_id', $id)->first();
         $savedfacilities = $houseView->facilities;
-        // dd($savedfacilities);
-        return view('house.view', compact('houseView', 'savedfacilities'));
+        $housephoto = DB::table('photos')
+            ->where('house_id', '=', $id)
+            ->pluck('photolink')->toArray();
+        $housephotolink = array();
+        foreach ($housephoto as $k => $photo) {
+            array_push($housephotolink, "/images/" . $photo);
+        }
+
+        return view('house.view', compact('houseView', 'savedfacilities', 'housephotolink'));
     }
     public function edit($id)
     {
         $houseView = DB::table('houses')->where('house_id', $id)->first();
         $savedfacilities = $houseView->facilities;
-        // dd($savedfacilities);
+
         return view('house.edit', compact('houseView', 'savedfacilities'));
     }
 
@@ -116,12 +121,12 @@ class HomeController extends Controller
         ]);
         return response()->json($house, 201);
     }
-    
+
     public function update(Request $request, $id)
     {
-        
+
         $house = House::find($id);
-        
+
         $house->title = $request['title'];
         $house->property_type = $request['property_type'];
         $house->property_name = $request['property_name'];
