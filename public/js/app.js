@@ -2977,6 +2977,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
@@ -4340,6 +4342,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["houselist"],
   components: {},
@@ -4914,8 +4917,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["servicelist"],
+  props: ["servicelist", "myhouse"],
   components: {},
   created: function created() {},
   data: function data() {
@@ -5114,6 +5120,7 @@ __webpack_require__.r(__webpack_exports__);
           confirmchargelist: _this.rentcharge,
           house_id: _this.addtenant.house_id,
           renter_id: _this.addtenant.renter_id,
+          deposit: parseInt(_this.deposit),
           total: parseInt(_this.addtenant.rental),
           month: "",
           pay_date: moment__WEBPACK_IMPORTED_MODULE_0___default()(_this.due_on).format()
@@ -63511,7 +63518,7 @@ var render = function() {
                         staticClass: "modal-title",
                         attrs: { id: "modal-title-notification" }
                       },
-                      [_vm._v(" " + _vm._s(_vm.selectedID))]
+                      [_vm._v("I am Interested")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -66059,170 +66066,182 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.invoices.title
-    ? _c("div", { staticClass: "header-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card card-stats" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "h5",
-                        {
-                          staticClass:
-                            "card-title text-uppercase text-muted mb-0"
-                        },
-                        [_vm._v("Title")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "h2 font-weight-bold mb-0" }, [
-                        _vm._v("#RF" + _vm._s(_vm.invoices.title))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "h5",
-                        {
-                          staticClass:
-                            "card-title text-uppercase text-muted mb-0"
-                        },
-                        [_vm._v("Property Type")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "h2 font-weight-bold mb-0" }, [
-                        _vm._v(_vm._s(_vm.invoices.property_type))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "h5",
-                        {
-                          staticClass:
-                            "card-title text-uppercase text-muted mb-0"
-                        },
-                        [_vm._v("Property Name")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "h2 font-weight-bold mb-0" }, [
-                        _vm._v(_vm._s(_vm.invoices.property_name))
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c(
-                        "h5",
-                        {
-                          staticClass:
-                            "card-title text-uppercase text-muted mb-0"
-                        },
-                        [_vm._v("Rental")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "h2 font-weight-bold mb-0" }, [
-                        _vm._v("RM" + _vm._s(_vm.invoices.rental))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-4" }, [
-                      _c("span", [
+  return _c("div", { staticClass: "container" }, [
+    _vm.invoices.title
+      ? _c("div", { staticClass: "header-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "card" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "card card-stats" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
                         _c(
                           "h5",
                           {
                             staticClass:
                               "card-title text-uppercase text-muted mb-0"
                           },
-                          [_vm._v("Deposit")]
+                          [_vm._v("Title")]
                         ),
                         _vm._v(" "),
                         _c(
                           "span",
                           { staticClass: "h2 font-weight-bold mb-0" },
-                          [_vm._v("RM" + _vm._s(_vm.invoices.deposit))]
+                          [_vm._v("#RF" + _vm._s(_vm.invoices.title))]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "h5",
+                          {
+                            staticClass:
+                              "card-title text-uppercase text-muted mb-0"
+                          },
+                          [_vm._v("Property Type")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "h2 font-weight-bold mb-0" },
+                          [_vm._v(_vm._s(_vm.invoices.property_type))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "h5",
+                          {
+                            staticClass:
+                              "card-title text-uppercase text-muted mb-0"
+                          },
+                          [_vm._v("Property Name")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "h2 font-weight-bold mb-0" },
+                          [_vm._v(_vm._s(_vm.invoices.property_name))]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "h5",
+                          {
+                            staticClass:
+                              "card-title text-uppercase text-muted mb-0"
+                          },
+                          [_vm._v("Rental")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "h2 font-weight-bold mb-0" },
+                          [_vm._v("RM" + _vm._s(_vm.invoices.rental))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("span", [
+                          _c(
+                            "h5",
+                            {
+                              staticClass:
+                                "card-title text-uppercase text-muted mb-0"
+                            },
+                            [_vm._v("Deposit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "h2 font-weight-bold mb-0" },
+                            [_vm._v("RM" + _vm._s(_vm.invoices.deposit))]
+                          )
+                        ])
                       ])
                     ])
                   ])
                 ])
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body scroll-add" }, [
-                _c(
-                  "ul",
-                  { staticClass: "list-group list-group-flush list my--3" },
-                  _vm._l(_vm.reminderlist, function(reminder, key) {
-                    return _c(
-                      "li",
-                      { key: key, staticClass: "list-group-item px-0" },
-                      [
-                        _c("div", { staticClass: "row align-items-center" }, [
-                          _c("div", { staticClass: "col ml--2" }, [
-                            _c("h4", { staticClass: "mb-0" }, [
-                              _vm._v("Pay Rent: RM" + _vm._s(reminder.total))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "card" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body scroll-add" }, [
+                  _c(
+                    "ul",
+                    { staticClass: "list-group list-group-flush list my--3" },
+                    _vm._l(_vm.reminderlist, function(reminder, key) {
+                      return _c(
+                        "li",
+                        { key: key, staticClass: "list-group-item px-0" },
+                        [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col ml--2" }, [
+                              _c("h4", { staticClass: "mb-0" }, [
+                                _vm._v("Pay Rent: RM" + _vm._s(reminder.total))
+                              ]),
+                              _vm._v(" "),
+                              _c("small", { staticClass: "mb-0" }, [
+                                _vm._v("House: " + _vm._s(reminder.title))
+                              ]),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("small", { staticClass: "mb-0" }, [
+                                _vm._v(
+                                  "Month: " +
+                                    _vm._s(
+                                      _vm._f("formatmonth")(reminder.month)
+                                    )
+                                )
+                              ]),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("small", { staticClass: "mb-0" }, [
+                                _vm._v(
+                                  "Due Date: " +
+                                    _vm._s(
+                                      _vm._f("formatdate")(reminder.pay_date)
+                                    )
+                                )
+                              ])
                             ]),
                             _vm._v(" "),
-                            _c("small", { staticClass: "mb-0" }, [
-                              _vm._v("House: " + _vm._s(reminder.title))
-                            ]),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("small", { staticClass: "mb-0" }, [
-                              _vm._v(
-                                "Month: " +
-                                  _vm._s(_vm._f("formatmonth")(reminder.month))
-                              )
-                            ]),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("small", { staticClass: "mb-0" }, [
-                              _vm._v(
-                                "Due Date: " +
-                                  _vm._s(
-                                    _vm._f("formatdate")(reminder.pay_date)
-                                  )
+                            _c("div", { staticClass: "col-auto" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-sm btn-success mr-4",
+                                  attrs: {
+                                    href: "/invoiceview/" + reminder.invoice_id
+                                  }
+                                },
+                                [_vm._v("View Invoice")]
                               )
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "col-auto" }, [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-success mr-4",
-                                attrs: {
-                                  href: "/invoiceview/" + reminder.invoice_id
-                                }
-                              },
-                              [_vm._v("View Invoice")]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("hr", { staticClass: "m-0" })
-                      ]
-                    )
-                  }),
-                  0
-                )
+                          _c("hr", { staticClass: "m-0" })
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
               ])
             ])
           ])
         ])
-      ])
-    : _vm._e()
+      : _vm._e()
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -67852,7 +67871,8 @@ var render = function() {
                               [_vm._v("View")]
                             ),
                             _vm._v(" "),
-                            invoices.payment_status != "paid"
+                            invoices.payment_status != "paid" &&
+                            invoices.can_edit == "yes"
                               ? _c(
                                   "a",
                                   {
@@ -68920,23 +68940,46 @@ var render = function() {
                     _vm._v(_vm._s(house.city))
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm btn-info",
-                      attrs: {
-                        href: "/viewhouse/" + house.house_id,
-                        "data-toggle": "modal",
-                        "data-target": "#modal-notification"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.addToModel(house)
-                        }
-                      }
-                    },
-                    [_vm._v("Interested")]
-                  ),
+                  house.status == "Available"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-info",
+                          attrs: {
+                            href: "/viewhouse/" + house.house_id,
+                            "data-toggle": "modal",
+                            "data-target": "#modal-notification"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.addToModel(house)
+                            }
+                          }
+                        },
+                        [_vm._v("Interested")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  house.status != "Available"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-info",
+                          attrs: {
+                            href: "/viewhouse/" + house.house_id,
+                            "data-toggle": "modal",
+                            "data-target": "#modal-notification",
+                            disabled: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.addToModel(house)
+                            }
+                          }
+                        },
+                        [_vm._v("Rented")]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "a",
@@ -69731,7 +69774,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 id: "input-titletitle",
-                                placeholder: "Title"
+                                placeholder: "Description"
                               },
                               domProps: { value: _vm.description },
                               on: {
@@ -70331,27 +70374,24 @@ var render = function() {
                       _vm._v("Service List "),
                       !_vm.servicelist.length
                         ? _c("span", { staticClass: "text-sm text-gray" }, [
-                            _vm._v(" - [No House to create service] ")
+                            _vm._v(" - [no service created] ")
                           ])
                         : _vm._e()
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm.servicelist.length
-                    ? _c("div", { staticClass: "col-4 text-right" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: {
-                              href:
-                                "/servicecreate/" + _vm.servicelist[0].house_id
-                            }
-                          },
-                          [_vm._v("Create")]
-                        )
-                      ])
-                    : _vm._e()
+                  _c("div", { staticClass: "col-4 text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          href: "/servicecreate/" + _vm.myhouse[0].house_id
+                        }
+                      },
+                      [_vm._v("Create")]
+                    )
+                  ])
                 ])
               ]),
               _vm._v(" "),

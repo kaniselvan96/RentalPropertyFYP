@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class PropertyController extends Controller
 {
-    function list()
-    {
-        $houseList = DB::table('houses')->where('status', 'Available')->get();
+    function list() {
+        $houseList = DB::table('houses')
+            // ->where('status', 'Available')
+            ->get();
         return view('property.list', compact('houseList'));
     }
 
-
-    function requestpropertylist()
+    public function requestpropertylist()
     {
         $requestpropertylist = DB::table('tenancy_request')
             ->select('tenancy_request.*', 'users.*', 'houses.*', 'tenancy_request.status as request_status')
@@ -54,44 +54,44 @@ class PropertyController extends Controller
 
         //update count
         $pending = DB::table('tenancy_request')
-                ->where('status', 'Pending')
-                ->count();
+            ->where('status', 'Pending')
+            ->count();
         $viewing = DB::table('tenancy_request')
-                ->where('status', 'Viewing')
-                ->count();
+            ->where('status', 'Viewing')
+            ->count();
         $accepted = DB::table('tenancy_request')
-                ->where('status', 'Accepted')
-                ->count();
+            ->where('status', 'Accepted')
+            ->count();
         $rejected = DB::table('tenancy_request')
-                ->where('status', 'Rejected')
-                ->count();
+            ->where('status', 'Rejected')
+            ->count();
         $request = [];
-        $request['pending']=$pending;
-        $request['viewing']=$viewing;
-        $request['accepted']=$accepted;
-        $request['rejected']=$rejected;
+        $request['pending'] = $pending;
+        $request['viewing'] = $viewing;
+        $request['accepted'] = $accepted;
+        $request['rejected'] = $rejected;
         return response()->json($request, 201);
     }
 
     public function requestpropertymainstatus()
     {
         $pending = DB::table('tenancy_request')
-                ->where('status', 'Pending')
-                ->count();
+            ->where('status', 'Pending')
+            ->count();
         $viewing = DB::table('tenancy_request')
-                ->where('status', 'Viewing')
-                ->count();
+            ->where('status', 'Viewing')
+            ->count();
         $accepted = DB::table('tenancy_request')
-                ->where('status', 'Accepted')
-                ->count();
+            ->where('status', 'Accepted')
+            ->count();
         $rejected = DB::table('tenancy_request')
-                ->where('status', 'Rejected')
-                ->count();
+            ->where('status', 'Rejected')
+            ->count();
         $request = [];
-        $request['pending']=$pending;
-        $request['viewing']=$viewing;
-        $request['accepted']=$accepted;
-        $request['rejected']=$rejected;
+        $request['pending'] = $pending;
+        $request['viewing'] = $viewing;
+        $request['accepted'] = $accepted;
+        $request['rejected'] = $rejected;
         return response()->json($request, 201);
     }
 }

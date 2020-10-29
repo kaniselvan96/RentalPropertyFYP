@@ -19,9 +19,12 @@ class InvoiceController extends Controller
      */
     public function invoicelist()
     {
-        $yearmonth = Carbon::now()->addMonths(2);
+        $yearmonth = Carbon::now()->addMonths(1);
         $yearmonth = Carbon::parse($yearmonth)->format('Y-m');
-        // dd($yearmonth);
+
+        $currentyearmonth = Carbon::now()->addMonths(0);
+        $currentyearmonth = Carbon::parse($currentyearmonth)->format('Y-m');
+        // dd($currentyearmonth);
 
         $houseList = DB::table('houses')
             ->select('house_id', 'title')
@@ -52,6 +55,12 @@ class InvoiceController extends Controller
                     $invoice->payment_status = 'overdue';
                     $overdue = $overdue + 1;
                 }
+            }
+
+            if ($invoice->month == $currentyearmonth) {
+                $invoice->can_edit = 'no';
+            }else{
+                $invoice->can_edit = 'yes';
             }
         }
 
@@ -188,17 +197,22 @@ class InvoiceController extends Controller
 
     public function storeinvoiceauto(Request $request)
     {
-
+        // dd($request);
         for ($x = 0; $x < 5; $x++) {
+
             $yearmonth = Carbon::now()->addMonths($x);
             $yearmonth = Carbon::parse($yearmonth)->format('Y-m');
             $pay_date = Carbon::parse($request['pay_date'])->addMonths($x);
             $pay_date = Carbon::parse($pay_date)->format('Y-m-d');
+            $total = $request['total'];
+            if ($x == 0) {
+                $total = $request['total'] + $request['deposit'];
+            }
             $invoice = Invoice::create([
                 'renter_id' => $request['renter_id'],
                 'house_id' => $request['house_id'],
                 'landlord_id' => Auth::user()->id,
-                'total' => $request['total'],
+                'total' => $total,
                 'month' => $yearmonth,
                 'pay_date' => $pay_date,
                 'status' => "Billed",
@@ -219,6 +233,17 @@ class InvoiceController extends Controller
                         'status' => "Billed",
                         'description_charge' => $chargelist['description_charge'],
                     ]);
+                    if ($x == 0) {
+                        $addCharge = Charge::create([
+                            'invoice_id' => $invoice->invoice_id,
+                            'house_id' => $request['house_id'],
+                            'amount' => $request['deposit'],
+                            'charge_date' => $chargelist['charge_date'],
+                            'status' => "Billed",
+                            'description_charge' => $chargelist['description_charge'],
+                        ]);
+                    }
+
                 }
             }
         }
@@ -228,7 +253,7 @@ class InvoiceController extends Controller
 
     public function invoicetenantlist()
     {
-        $yearmonth = Carbon::now()->addMonths(2);
+        $yearmonth = Carbon::now()->addMonths(0);
         $yearmonth = Carbon::parse($yearmonth)->format('Y-m');
 
         $invoicesList = DB::table('invoices')
@@ -301,6 +326,8 @@ class InvoiceController extends Controller
                 $editcharge->description_charge = $charge["description_charge"];
                 $editcharge->charge_date = $charge["charge_date"];
                 $editcharge->amount = $charge["amount"];
+                $editcharge->invoice_id = $request->invoice_id;
+                $editcharge->status = "Billed";
                 $editcharge->save();
             } else {
                 $addCharge = Charge::create([

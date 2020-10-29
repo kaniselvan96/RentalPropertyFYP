@@ -94,7 +94,7 @@
                                         <td><button v-if="invoices.payment_status == 'overdue'" class="btn btn-sm btn-info" @click="sendreminder(invoices)">Send</button> <span v-if="invoices.payment_status == 'overdue' && invoices.reminder > 0">({{invoices.reminder}})</span></td>
                                         <td>
                                             <a v-bind:href="'/invoiceview/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">View</a>
-                                            <a v-if="invoices.payment_status != 'paid'" v-bind:href="'/invoiceedit/'+ invoices.house_id+'/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">Edit</a>
+                                            <a v-if="invoices.payment_status != 'paid' && invoices.can_edit == 'yes'" v-bind:href="'/invoiceedit/'+ invoices.house_id+'/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">Edit</a>
                                         </td>
                                     </tr>
                                 </tbody>

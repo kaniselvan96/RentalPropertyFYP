@@ -28,7 +28,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-title">Description</label>
-                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Title" v-model="description" />
+                                                <input type="text" id="input-titletitle" class="form-control" placeholder="Description" v-model="description" />
                                             </div>
                                         </div>
                                     </div>

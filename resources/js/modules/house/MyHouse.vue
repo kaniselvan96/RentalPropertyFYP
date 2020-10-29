@@ -1,4 +1,5 @@
 <template>
+<div class="container">
     <div class="header-body" v-if="invoices.title">
         <!-- Card stats -->
         <div class="row">
@@ -71,6 +72,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </template>
 

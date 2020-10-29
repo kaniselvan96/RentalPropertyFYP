@@ -21,6 +21,13 @@
         @guest
         <all-house :islogin="{{0}}"></all-house>
         @else
-        <all-house :islogin="{{auth()->id()}}"></all-house>
+
+            @if (Auth::user()->user_type == "landlord")
+                <script type="text/javascript">
+                    window.location = "/listhouse";
+                </script>
+            @else
+            <my-house :islogin="{{auth()->id()}}"></my-house>
+            @endif
         @endif
 @endsection

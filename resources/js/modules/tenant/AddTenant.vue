@@ -177,6 +177,7 @@
                             confirmchargelist: this.rentcharge,
                             house_id: this.addtenant.house_id,
                             renter_id: this.addtenant.renter_id,
+                            deposit: parseInt(this.deposit),
                             total: parseInt(this.addtenant.rental),
                             month: "",
                             pay_date: moment(this.due_on).format(),

@@ -15,7 +15,8 @@
                     <div class="card-body">
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>
-                        <button v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification">Interested</button> 
+                        <button v-if="house.status == 'Available'" v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification">Interested</button> 
+                        <button v-if="house.status != 'Available'" v-bind:href="'/viewhouse/'+ house.house_id" @click="addToModel(house)" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal-notification" disabled>Rented</button> 
                         <a v-bind:href="'/viewhouse/'+ house.house_id" class="btn btn-sm btn-warning">More</a>
                     </div>
                 </div>

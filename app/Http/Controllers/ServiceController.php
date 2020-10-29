@@ -25,7 +25,15 @@ class ServiceController extends Controller
             ->where('renter_id', Auth::user()->id)
             ->orderBy('service_id', 'desc')
             ->get();
-        return view('service.servicelist', compact('servicelist'));
+
+            $myhouse = DB::table('tenants')
+            ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
+            ->join('users', 'users.id', '=', 'tenants.renter_id')
+            ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+            ->where('tenants.renter_id', Auth::user()->id)
+            ->get();
+            // dd($myhouse);
+        return view('service.servicelist', compact('servicelist','myhouse'));
     }
     function servicelandlordlist()
     {

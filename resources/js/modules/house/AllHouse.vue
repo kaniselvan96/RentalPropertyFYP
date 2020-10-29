@@ -34,7 +34,7 @@
             
             <div class="modal-content bg-success">
               <div class="modal-header">
-                <h6 class="modal-title" id="modal-title-notification"> {{selectedID}}</h6>
+                <h6 class="modal-title" id="modal-title-notification">I am Interested</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" ref="closeVuemodal">
                   <span aria-hidden="true">×</span>
                 </button>
