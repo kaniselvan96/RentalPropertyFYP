@@ -29,6 +29,22 @@ class PublicController extends Controller
                 else
                     $seenItems[] = $item["house_id"];
             }
+
+
+            foreach($myhouse as $houseindex => $house){
+                foreach($myhousephoto as $index => $photo){
+                    $myhouse[$houseindex]->photolink = "default.png";
+                }
+            }
+            foreach($myhouse as $houseindex => $house){
+                foreach($myhousephoto as $index => $photo){
+                    if($photo["house_id"] == $house->house_id){
+                        $myhouse[$houseindex]->photolink = $photo["photolink"];
+                    }
+                     
+                }
+            }
+
             $myhousephoto = array_values($myhousephoto);
         $myhousemain['myhouse'] = $myhouse;
         $myhousemain['myhousephoto'] = $myhousephoto;
@@ -46,6 +62,9 @@ class PublicController extends Controller
         $housephotolink = array();
         foreach ($housephoto as $k => $photo) {
             array_push($housephotolink, "/images/" . $photo);
+        }
+        if(empty($housephotolink)){
+            array_push($housephotolink, "/images/default.png");
         }
         return view('house.view', compact('houseView', 'savedfacilities', 'housephotolink'));
     }

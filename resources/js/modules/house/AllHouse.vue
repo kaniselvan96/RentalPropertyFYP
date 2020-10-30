@@ -11,7 +11,7 @@
 
             <div class="col-lg-3" v-for="(house, key) in houselist" :key="key">
                 <div class="card">
-                    <img class="card-img-top" v-bind:src="'/images/'+ myhousephoto[key].photolink" alt="Image placeholder">
+                    <img class="card-img-top" v-bind:src="'/images/'+ house.photolink" alt="Image placeholder">
                     <div class="card-body">
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>

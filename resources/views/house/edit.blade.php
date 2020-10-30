@@ -3,6 +3,6 @@
 
 @section('content')
 
-<house-edit :houseView="{{json_encode($houseView)}}" :savedfacilities="{{$savedfacilities}}"></house-edit>
+<house-edit :houseView="{{json_encode($houseView)}}" :savedfacilities="{{$savedfacilities}}":saveimages="{{$saveimages}}" ></house-edit>
 
   @endsection

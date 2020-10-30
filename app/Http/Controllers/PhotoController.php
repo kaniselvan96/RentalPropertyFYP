@@ -15,7 +15,6 @@ class PhotoController extends Controller
     public function photohouse($id)
     {
         $houseView = DB::table('houses')->where('house_id', $id)->first();
-        $saveimages = DB::table('houses')->where('house_id', $id)->first();
 
         $saveimages = DB::table('houses')
         ->join('photos', 'photos.house_id', '=', 'houses.house_id')

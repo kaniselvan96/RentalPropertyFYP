@@ -67,6 +67,9 @@ class HomeController extends Controller
         foreach ($housephoto as $k => $photo) {
             array_push($housephotolink, "/images/" . $photo);
         }
+        if(empty($housephotolink)){
+            array_push($housephotolink, "/images/default.png");
+        }
 
         return view('house.view', compact('houseView', 'savedfacilities', 'housephotolink'));
     }
@@ -75,7 +78,11 @@ class HomeController extends Controller
         $houseView = DB::table('houses')->where('house_id', $id)->first();
         $savedfacilities = $houseView->facilities;
 
-        return view('house.edit', compact('houseView', 'savedfacilities'));
+        $saveimages = DB::table('houses')
+        ->join('photos', 'photos.house_id', '=', 'houses.house_id')
+        ->where('houses.house_id', $id)
+        ->get();
+        return view('house.edit', compact('houseView', 'savedfacilities', 'saveimages'));
     }
 
     public function create()
@@ -85,19 +92,6 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->houseData->title);
-        // print_r(json_decode($request->reso_data));
-        // $test = json_decode($request->reso_data);
-        // dd($test[0]->reso_no);
-        // dd($request->all());
-        // $request->validate([
-        //     'counter_id' => 'required',
-        //     'title' => 'required',
-        //     'total_no' => 'required',
-        //     'reso_data.*.reso_no' => 'required|string',
-        //     'reso_data.*.reso_description' => 'required|string',
-        // ]);
-
         $house = House::create([
             'title' => $request['title'],
             'property_type' => $request['property_type'],

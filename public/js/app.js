@@ -2288,6 +2288,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {},
   data: function data() {
@@ -2309,12 +2346,50 @@ __webpack_require__.r(__webpack_exports__);
       state: "",
       description: "",
       facilities: ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"],
-      checkedfacilities: []
+      checkedfacilities: [],
+      images: [],
+      maxImages: 15,
+      addImage: "button.add-image"
     };
   },
   computed: {},
   methods: {
+    addNewImage: function addNewImage(e) {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length < n) {
+        this.images.push("");
+      }
+
+      this.checkImages();
+    },
+    removeImage: function removeImage(index) {
+      this.images.splice(index, 1);
+      this.checkImages();
+    },
+    checkImages: function checkImages() {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length >= n) {
+        $(this.addImage, this.el).prop("disabled", true); // Disables the button.
+      } else {
+        $(this.addImage, this.el).prop("disabled", false); // Enables the button.
+      }
+    },
+    previewImage: function previewImage(index, e) {
+      var r = new FileReader(),
+          f = e.target.files[0];
+      r.addEventListener("load", function () {
+        $('[class~="images[' + index + ']-preview"]', this.el).html('<img src="' + r.result + '" class="thumbnail img-responsive btn-width">');
+      }, false);
+
+      if (f) {
+        r.readAsDataURL(f);
+      }
+    },
     formSubmit: function formSubmit(event) {
+      var _this = this;
+
       // https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
       var houseData = {
         title: this.title,
@@ -2337,7 +2412,25 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/storehouse", houseData) // .post("/meeting", data)
       .then(function (response) {
-        console.log("response", response);
+        console.log("response", response); // location.href = "/listhouse";
+
+        console.log(response.data.house_id);
+        var vm = _this;
+        var data = new FormData(event.target);
+        $('[class~="images[]"]', _this.el).each(function (i) {
+          if (i > vm.maxImages - 1) {
+            return; // Max images reached.
+          }
+
+          data.append("images[" + i + "]", this.files[0]);
+        });
+        data.append("house_id", response.data.house_id);
+        axios.post("/photostore", data) // .post("/meeting", data)
+        .then(function (response) {
+          console.log("response", response); // location.href = "/photohouse/"+this.houseview.house_id;
+        })["catch"](function (error) {
+          console.log("response", error);
+        });
         location.href = "/listhouse";
       })["catch"](function (error) {
         console.log("response", error);
@@ -2559,8 +2652,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["houseview", "savedfacilities"],
+  props: ["houseview", "savedfacilities", "saveimages"],
   components: {},
   data: function data() {
     var _ref;
@@ -2582,7 +2742,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       city: this.houseview.city,
       state: this.houseview.state,
       description: this.houseview.description
-    }, _defineProperty(_ref, "state", this.houseview.state), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", this.savedfacilities), _ref;
+    }, _defineProperty(_ref, "state", this.houseview.state), _defineProperty(_ref, "facilities", ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"]), _defineProperty(_ref, "checkedfacilities", this.savedfacilities), _defineProperty(_ref, "images", []), _defineProperty(_ref, "maxImages", 15), _defineProperty(_ref, "addImage", "button.add-image"), _ref;
   },
   //   created () {
   //           this.title= this.houseview.title
@@ -2605,7 +2765,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   //     },
   computed: {},
   methods: {
+    addNewImage: function addNewImage(e) {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length < n) {
+        this.images.push("");
+      }
+
+      this.checkImages();
+    },
+    removeImage: function removeImage(index) {
+      this.images.splice(index, 1);
+      this.checkImages();
+    },
+    checkImages: function checkImages() {
+      var n = this.maxImages || -1;
+
+      if (n && this.images.length >= n) {
+        $(this.addImage, this.el).prop("disabled", true); // Disables the button.
+      } else {
+        $(this.addImage, this.el).prop("disabled", false); // Enables the button.
+      }
+    },
+    previewImage: function previewImage(index, e) {
+      var r = new FileReader(),
+          f = e.target.files[0];
+      r.addEventListener("load", function () {
+        $('[class~="images[' + index + ']-preview"]', this.el).html('<img src="' + r.result + '" class="thumbnail img-responsive btn-width">');
+      }, false);
+
+      if (f) {
+        r.readAsDataURL(f);
+      }
+    },
     formSubmit: function formSubmit(event) {
+      var _this = this;
+
       var houseData = {
         title: this.title,
         property_type: this.property_type,
@@ -2627,8 +2822,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       axios.post("/updatehouse/" + this.houseview.house_id, houseData) // .post("/meeting", data)
       .then(function (response) {
-        console.log("response", response);
+        console.log("response", response); // location.href = "/listhouse";
+
+        console.log(response.data.house_id);
+        var vm = _this;
+        var data = new FormData(event.target);
+        $('[class~="images[]"]', _this.el).each(function (i) {
+          if (i > vm.maxImages - 1) {
+            return; // Max images reached.
+          }
+
+          data.append("images[" + i + "]", this.files[0]);
+        });
+        data.append("house_id", response.data.house_id);
+        axios.post("/photostore", data) // .post("/meeting", data)
+        .then(function (response) {
+          console.log("response", response); // location.href = "/photohouse/"+this.houseview.house_id;
+        })["catch"](function (error) {
+          console.log("response", error);
+        });
         location.href = "/listhouse";
+      })["catch"](function (error) {
+        console.log("response", error);
+      });
+    },
+    removeSaveImage: function removeSaveImage(removedata) {
+      var _this2 = this;
+
+      axios.post("/photoremove", removedata).then(function (response) {
+        location.href = "/edithouse/" + _this2.houseview.house_id;
       })["catch"](function (error) {
         console.log("response", error);
       });
@@ -63429,7 +63651,7 @@ var render = function() {
                 _c("img", {
                   staticClass: "card-img-top",
                   attrs: {
-                    src: "/images/" + _vm.myhousephoto[key].photolink,
+                    src: "/images/" + house.photolink,
                     alt: "Image placeholder"
                   }
                 }),
@@ -63775,6 +63997,110 @@ var render = function() {
                     }
                   },
                   [
+                    _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
+                      _vm._v(
+                        "\n                                Add Photo\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "pl-lg-4" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          attrs: { if: _vm.images.length }
+                        },
+                        _vm._l(_vm.images, function(f, index) {
+                          return _c(
+                            "div",
+                            {
+                              key: index,
+                              staticClass: "col-lg-6 d-flex align-items-center"
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c("div", {
+                                        class:
+                                          "images[" +
+                                          index +
+                                          "]-preview image-preview"
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col ml--2" }, [
+                                      _c("h4", { staticClass: "mb-0" }, [
+                                        _c("input", {
+                                          staticClass: "images[]",
+                                          attrs: {
+                                            type: "file",
+                                            accept: "image/*"
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              return _vm.previewImage(
+                                                index,
+                                                $event
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-primary",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.removeImage(
+                                                index,
+                                                $event
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Remove")]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-6" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary add-image",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.addNewImage($event)
+                                  }
+                                }
+                              },
+                              [_vm._v("Add Image")]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
                     _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
                       _vm._v(
                         "\n                                Rental information\n                            "
@@ -64721,6 +65047,174 @@ var render = function() {
                   [
                     _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
                       _vm._v(
+                        "\n                                Edit Photo\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "pl-lg-4" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          attrs: { if: _vm.saveimages.length }
+                        },
+                        _vm._l(_vm.saveimages, function(saved, index) {
+                          return _c(
+                            "div",
+                            {
+                              key: index,
+                              staticClass: "col-lg-6 d-flex align-items-center"
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c("img", {
+                                        staticClass: "btn-width",
+                                        attrs: {
+                                          alt: "Image placeholder",
+                                          src: "/images/" + saved.photolink
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(1, true),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-primary",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.removeSaveImage(saved)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Remove")]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
+                      _vm._v(
+                        "\n                                Add Photo\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "pl-lg-4" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "row",
+                          attrs: { if: _vm.images.length }
+                        },
+                        _vm._l(_vm.images, function(f, index) {
+                          return _c(
+                            "div",
+                            {
+                              key: index,
+                              staticClass: "col-lg-6 d-flex align-items-center"
+                            },
+                            [
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c("div", {
+                                        class:
+                                          "images[" +
+                                          index +
+                                          "]-preview image-preview"
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col ml--2" }, [
+                                      _c("h4", { staticClass: "mb-0" }, [
+                                        _c("input", {
+                                          staticClass: "images[]",
+                                          attrs: {
+                                            type: "file",
+                                            accept: "image/*"
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              return _vm.previewImage(
+                                                index,
+                                                $event
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-auto" }, [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-primary",
+                                          attrs: { type: "button" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.removeImage(
+                                                index,
+                                                $event
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Remove")]
+                                      )
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-6" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary add-image",
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.addNewImage($event)
+                                  }
+                                }
+                              },
+                              [_vm._v("Add Image")]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("h6", { staticClass: "heading-small text-muted mb-4" }, [
+                      _vm._v(
                         "\n                                Rental information\n                            "
                       )
                     ]),
@@ -65439,7 +65933,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "pl-lg-4" }, [
-                      _vm._m(1),
+                      _vm._m(2),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -65572,7 +66066,7 @@ var render = function() {
                         staticClass: "btn btn-success",
                         attrs: { type: "submit" }
                       },
-                      [_vm._v("Create")]
+                      [_vm._v("Update")]
                     )
                   ]
                 )
@@ -65595,6 +66089,14 @@ var staticRenderFns = [
           _c("h3", { staticClass: "mb-0" }, [_vm._v("Create Rental Property")])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col ml--2" }, [
+      _c("h4", { staticClass: "mb-0" })
     ])
   },
   function() {
@@ -65695,15 +66197,6 @@ var render = function() {
                                 attrs: { href: "/edithouse/" + house.house_id }
                               },
                               [_vm._v("Edit")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-sm btn-warning mr-4",
-                                attrs: { href: "/photohouse/" + house.house_id }
-                              },
-                              [_vm._v("Photo")]
                             ),
                             _vm._v(" "),
                             house.status == "Tenant"

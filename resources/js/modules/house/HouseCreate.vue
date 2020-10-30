@@ -18,6 +18,43 @@
                         <div class="card-body">
                             <form v-on:submit.prevent="formSubmit">
                                 <h6 class="heading-small text-muted mb-4">
+                                    Add Photo
+                                </h6>
+                                <div class="pl-lg-4">
+                                    <div class="row" :if="images.length">
+                                        <div class="col-lg-6 d-flex align-items-center" v-for="(f, index) in images" :key="index">
+                                            <div class="form-group">
+                                                <!-- <ul class="list-group list-group-flush list my--3" :if="images.length">
+                                                    <li class="list-group-item px-0" v-for="(f, index) in images" :key="index"> -->
+
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div :class="'images[' + index + ']-preview image-preview'"></div>
+                                                    </div>
+                                                    <div class="col ml--2">
+                                                        <h4 class="mb-0">
+                                                            <input type="file" class="images[]" accept="image/*" @change="previewImage(index, $event)" />
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button type="button" class="btn btn-sm btn-primary" @click.prevent="removeImage(index, $event)">Remove</button>
+                                                    </div>
+                                                </div>
+
+                                                <!-- </li>
+                                                </ul> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary add-image" @click.prevent="addNewImage">Add Image</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 class="heading-small text-muted mb-4">
                                     Rental information
                                 </h6>
                                 <div class="pl-lg-4">
@@ -222,10 +259,49 @@
                 facilities: ["Refrigerator", "Cooker", "Water filter", "Washing machine", "Wardrobe", "Ceiling fan"],
 
                 checkedfacilities: [],
+                images: [],
+                maxImages: 15,
+                addImage: "button.add-image",
             };
         },
         computed: {},
         methods: {
+            addNewImage: function (e) {
+                var n = this.maxImages || -1;
+                if (n && this.images.length < n) {
+                    this.images.push("");
+                }
+                this.checkImages();
+            },
+
+            removeImage: function (index) {
+                this.images.splice(index, 1);
+                this.checkImages();
+            },
+            checkImages: function () {
+                var n = this.maxImages || -1;
+                if (n && this.images.length >= n) {
+                    $(this.addImage, this.el).prop("disabled", true); // Disables the button.
+                } else {
+                    $(this.addImage, this.el).prop("disabled", false); // Enables the button.
+                }
+            },
+            previewImage: function (index, e) {
+                var r = new FileReader(),
+                    f = e.target.files[0];
+
+                r.addEventListener(
+                    "load",
+                    function () {
+                        $('[class~="images[' + index + ']-preview"]', this.el).html('<img src="' + r.result + '" class="thumbnail img-responsive btn-width">');
+                    },
+                    false
+                );
+
+                if (f) {
+                    r.readAsDataURL(f);
+                }
+            },
             formSubmit(event) {
                 // https://stackoverflow.com/questions/49940889/how-can-i-add-multiple-images-along-with-other-input-fields-in-vue-js-html
 
@@ -253,6 +329,31 @@
                     // .post("/meeting", data)
                     .then((response) => {
                         console.log("response", response);
+                        // location.href = "/listhouse";
+                        console.log(response.data.house_id);
+
+                        var vm = this;
+
+                        var data = new FormData(event.target);
+
+                        $('[class~="images[]"]', this.el).each(function (i) {
+                            if (i > vm.maxImages - 1) {
+                                return; // Max images reached.
+                            }
+                            data.append("images[" + i + "]", this.files[0]);
+                        });
+                        data.append("house_id", response.data.house_id);
+                        axios
+                            .post("/photostore", data)
+                            // .post("/meeting", data)
+                            .then((response) => {
+                                console.log("response", response);
+                                // location.href = "/photohouse/"+this.houseview.house_id;
+                            })
+                            .catch(function (error) {
+                                console.log("response", error);
+                            });
+
                         location.href = "/listhouse";
                     })
                     .catch(function (error) {
