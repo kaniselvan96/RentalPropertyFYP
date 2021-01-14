@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,7 +34,9 @@ Route::get('/createhouse', [App\Http\Controllers\HomeController::class, 'create'
 Route::post('/storehouse', [App\Http\Controllers\HomeController::class, 'store'])->name('storehome');
 Route::post('/updatehouse/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('storehome');
 Route::post('/myhouse', [App\Http\Controllers\HomeController::class, 'myhouse'])->name('myhouse');
+
 Route::post('/getreminder', [App\Http\Controllers\HomeController::class, 'getreminder'])->name('getreminder');
+Route::post('/deletereminder', [App\Http\Controllers\HomeController::class, 'deletereminder'])->name('deletereminder');
 
 //photo
 Route::get('/photohouse/{id}', [App\Http\Controllers\PhotoController::class, 'photohouse'])->name('photohouse');
@@ -52,6 +54,7 @@ Route::post('/requestpropertymainstatus', [App\Http\Controllers\PropertyControll
 Route::get('/addtenant/{id}', [App\Http\Controllers\TenantController::class, 'addtenant'])->name('addtenant');
 Route::get('/viewtenant/{id}', [App\Http\Controllers\TenantController::class, 'viewtenant'])->name('viewtenant');
 Route::post('/storeaddtenant', [App\Http\Controllers\TenantController::class, 'storeaddtenant'])->name('storeaddtenant');
+Route::post('/deletetenant', [App\Http\Controllers\TenantController::class, 'deletetenant'])->name('deletetenant');
 
 //invoice
 Route::get('/invoicelist', [App\Http\Controllers\InvoiceController::class, 'invoicelist'])->name('invoicelist');
@@ -62,19 +65,19 @@ Route::post('/storeinvoice', [App\Http\Controllers\InvoiceController::class, 'st
 Route::post('/storeinvoiceauto', [App\Http\Controllers\InvoiceController::class, 'storeinvoiceauto'])->name('storeinvoiceauto');
 Route::post('/editinvoice', [App\Http\Controllers\InvoiceController::class, 'editinvoice'])->name('editinvoice');
 Route::post('/reminder', [App\Http\Controllers\InvoiceController::class, 'reminder'])->name('reminder');
+Route::post('/deleteinvoice', [App\Http\Controllers\InvoiceController::class, 'deleteinvoice'])->name('deleteinvoice');
 
-
-//tenant invoice 
+//tenant invoice
 Route::get('/invoicetenantlist', [App\Http\Controllers\InvoiceController::class, 'invoicetenantlist'])->name('invoicetenantlist');
 Route::post('/payinvoice', [App\Http\Controllers\InvoiceController::class, 'payinvoice'])->name('payinvoice');
 
-//service tenant 
+//service tenant
 Route::get('/servicelist', [App\Http\Controllers\ServiceController::class, 'servicelist'])->name('servicelist');
 Route::get('/servicecreate/{id}', [App\Http\Controllers\ServiceController::class, 'servicecreate'])->name('servicecreate');
 Route::post('/servicestore', [App\Http\Controllers\ServiceController::class, 'servicestore'])->name('servicestore');
 
-
-//service Landlord 
+//service Landlord
 Route::get('/servicelandlordlist', [App\Http\Controllers\ServiceController::class, 'servicelandlordlist'])->name('servicelandlordlist');
 Route::post('/servicecstorecharge', [App\Http\Controllers\ServiceController::class, 'servicecstorecharge'])->name('servicecstorecharge');
 Route::post('/servicechangestatus', [App\Http\Controllers\ServiceController::class, 'servicechangestatus'])->name('servicechangestatus');
+Route::get('/servicepage', [App\Http\Controllers\ServiceController::class, 'servicepage'])->name('servicepage');

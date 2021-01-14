@@ -105,10 +105,13 @@ Vue.component(
     require("./modules/service/ServiceCreate.vue").default
 );
 
-//service
 Vue.component(
     "service-landlord-list",
     require("./modules/service/ServiceLandlordList.vue").default
+);
+Vue.component(
+    "service-page",
+    require("./modules/service/ServicePage.vue").default
 );
 //photo
 Vue.component(

@@ -1,8 +1,8 @@
 <template>
 	<div class="main-content mt-1" id="panel">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row justify-content-center">
-				<div class="col-xl-12">
+				<div class="col-xl-10">
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card card-stats">

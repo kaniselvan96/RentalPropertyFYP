@@ -11,7 +11,7 @@
 
             <div class="col-lg-3" v-for="(house, key) in houselist" :key="key">
                 <div class="card">
-                    <img class="card-img-top" v-bind:src="'/images/img-1-1000x600.jpg'" alt="Image placeholder">
+                   <img class="card-img-top" v-bind:src="'/images/'+ house.photolink" alt="Image placeholder">
                     <div class="card-body">
                     <h3>{{ house.title | str_limit(21) }}</h3>
                     <p class="card-text">{{house.city}}</p>
@@ -41,7 +41,7 @@
                     <form role="form" v-on:submit.prevent="formSubmit">
                       <div class="form-group mb-3">
                           <div class="form-group">
-                              <label class="form-control-label" for="input-property_type">Professional</label>
+                              <label class="form-control-label" for="input-property_type">Profession</label>
                               <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="professional"/>
                           </div>
                           <div class="form-group">
@@ -78,7 +78,7 @@
 
 <script>
 export default {
-    props: ["houselist"],
+    props: ["myhousemain"],
   components: {},
   created() {},
   data() {
@@ -87,7 +87,9 @@ export default {
       move_date:"",
       selectedID:"",
       duration: "",
-      landlord_id: ""
+      landlord_id: "",
+      houselist: this.myhousemain.houseList,
+      myhousephoto: this.myhousemain.myhousephoto
     };
   },
   computed: {},
@@ -123,4 +125,11 @@ export default {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    border-top-left-radius: calc(.375rem - 1px);
+    border-top-right-radius: calc(.375rem - 1px);
+}
+</style>

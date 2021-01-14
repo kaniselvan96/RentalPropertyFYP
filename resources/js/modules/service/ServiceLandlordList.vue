@@ -1,8 +1,8 @@
 <template>
     <div class="main-content mt-1" id="panel">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-xl-12">
+                <div class="col-xl-10">
                     <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card card-stats">
@@ -49,7 +49,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-8">
-                                    <h3 class="mb-0">Service List</h3>
+                                    <h3 class="mb-0">Report List</h3>
                                 </div>
                             </div>
                         </div>
@@ -78,14 +78,18 @@
                                     </div>
                                     <!-- <a v-bind:href="'/addtenant/'+ service.house_id" class="btn btn-primary mt-2 float-right" type="button">Add Change</a> -->
                                     <!-- <button @click="addToChargeModel(service.services_description)" v-if="service.services_status == 'Accepted'" class="btn btn-primary mt-2 float-right mr-0" >Add Change</button>  -->
-                                    <button @click="addToChargeModel(service)" v-if="service.services_status == 'Accepted' && service.charge_amount < 1" class="btn btn-primary mt-2 float-right mr-0" data-toggle="modal" data-target="#modal-notification">Add Change</button> 
+                                  <a v-bind:href="'/servicepage'" v-if="service.charge_amount < 1" class="btn btn-primary mt-2 float-right mr-0">Search Service</a>
+                                    <button @click="addToChargeModel(service)" v-if="service.services_status == 'Accepted' && service.charge_amount < 1" class="btn btn-primary mt-2 float-right mr-5" data-toggle="modal" data-target="#modal-notification">Add Charge</button> 
+                                    
                                     <h4 class="mt-3 mb-1">{{service.title}}</h4>
+                                    
                                     <h4 class="">#{{service.service_id}}</h4>
+                                      
                                     <p class="text-sm mb-0">Tenant : {{service.name}}</p>
                                    
                                     <div>
                                          <p class="text-sm mb-0">Location : {{service.state}}</p>
-                                          <span v-if="service.services_status == 'Accepted' && service.charge_amount > 0" class="h2 float-right mb-0">Cost : RM{{service.charge_amount}}</span></p>
+                                          <span v-if="service.services_status == 'Accepted' && service.charge_amount > 0" class="h2 float-right mb-0">Cost : RM{{service.charge_amount}}</span>
                                     </div>
                                 </div>
                                 <hr class="m-0 p-0" />

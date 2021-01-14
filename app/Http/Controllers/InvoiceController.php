@@ -29,6 +29,7 @@ class InvoiceController extends Controller
         $houseList = DB::table('houses')
             ->select('house_id', 'title')
             ->where('landlord_id', Auth::user()->id)
+            ->where('status', '=', "Tenant")
             ->get();
 
         $invoicesList = DB::table('invoices')
@@ -37,6 +38,7 @@ class InvoiceController extends Controller
             ->join('houses', 'houses.house_id', '=', 'invoices.house_id')
             ->where('invoices.landlord_id', Auth::user()->id)
             ->where('invoices.month', '<=', $yearmonth)
+            ->where('invoices.status', '=', "Billed")
             ->get();
 
         $nowdate = date('Y-m-d');
@@ -59,7 +61,7 @@ class InvoiceController extends Controller
 
             if ($invoice->month == $currentyearmonth) {
                 $invoice->can_edit = 'no';
-            }else{
+            } else {
                 $invoice->can_edit = 'yes';
             }
         }
@@ -147,13 +149,16 @@ class InvoiceController extends Controller
             ->where('invoice_id', $id)
             ->where('status', "Billed")
             ->get();
-
-        // dd($invoiceview);
-        // $billedChargeList = DB::table('charges')
-        //     ->where('house_id', $id)
-        //     ->where('status', "Billed")
-        //     ->get();
-        // dd($billedChargeList);
+        $nowdate = date('Y-m-d');
+        if ($invoiceview->pay_status == "paid") {
+            $invoiceview->payment_status = 'paid';
+        } else {
+            if ($invoiceview->pay_date > $nowdate) {
+                $invoiceview->payment_status = 'waiting';
+            } else {
+                $invoiceview->payment_status = 'overdue';
+            }
+        }
         return view('invoice.invoiceview', compact('invoiceview', 'chargelist'));
     }
 
@@ -240,7 +245,7 @@ class InvoiceController extends Controller
                             'amount' => $request['deposit'],
                             'charge_date' => $chargelist['charge_date'],
                             'status' => "Billed",
-                            'description_charge' => $chargelist['description_charge'],
+                            'description_charge' => "Deposit",
                         ]);
                     }
 
@@ -262,6 +267,7 @@ class InvoiceController extends Controller
             ->join('houses', 'houses.house_id', '=', 'invoices.house_id')
             ->where('invoices.renter_id', Auth::user()->id)
             ->where('invoices.month', '<=', $yearmonth)
+            ->where('invoices.status', '=', "Billed")
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
         $nowdate = date('Y-m-d');
@@ -340,6 +346,17 @@ class InvoiceController extends Controller
                 ]);
             }
         }
+
+        return response()->json($invoice, 201);
+    }
+
+    public function deleteinvoice(Request $request)
+    {
+        // dd($request->invoice_id);
+
+        $invoice = Invoice::find($request->invoice_id);
+        $invoice->status = "Removed";
+        $invoice->save();
 
         return response()->json($invoice, 201);
     }

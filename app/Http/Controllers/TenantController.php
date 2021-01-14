@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\House;
+use App\Models\TenancyRequest;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\TenancyRequest;
-use App\Models\Tenant;
 
 class TenantController extends Controller
 {
     public function addtenant($id)
     {
         $addtenant = DB::table('tenancy_request')
-        ->select('tenancy_request.*', 'users.*', 'houses.*', 'tenancy_request.status as request_status')
-        ->join('users', 'users.id', '=', 'tenancy_request.renter_id')
-        ->join('houses', 'houses.house_id', '=', 'tenancy_request.house_id')
-        ->where('tenancy_request.landlord_id', Auth::user()->id)
-        ->where('tenancy_request.house_id', $id)
-        ->get();
+            ->select('tenancy_request.*', 'users.*', 'houses.*', 'tenancy_request.status as request_status')
+            ->join('users', 'users.id', '=', 'tenancy_request.renter_id')
+            ->join('houses', 'houses.house_id', '=', 'tenancy_request.house_id')
+            ->where('tenancy_request.landlord_id', Auth::user()->id)
+            ->where('tenancy_request.house_id', $id)
+            ->get();
         // dd($addtenant);
         $addtenant = $addtenant[0];
         return view('tenant.addtenant', compact('addtenant'));
@@ -27,17 +27,17 @@ class TenantController extends Controller
     public function viewtenant($id)
     {
         $viewtenant = DB::table('tenants')
-        ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
-        ->join('users', 'users.id', '=', 'tenants.renter_id')
-        ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
-        ->where('tenants.landlord_id', Auth::user()->id)
-        ->where('tenants.house_id', $id)
-        ->get();
+            ->select('tenants.*', 'users.*', 'houses.*', 'tenants.status as request_status')
+            ->join('users', 'users.id', '=', 'tenants.renter_id')
+            ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
+            ->where('tenants.landlord_id', Auth::user()->id)
+            ->where('tenants.house_id', $id)
+            ->get();
         // dd($viewtenant);
         $viewtenant = $viewtenant[0];
         return view('tenant.viewtenant', compact('viewtenant'));
     }
-    
+
     public function storeaddtenant(Request $request)
     {
 
@@ -66,12 +66,22 @@ class TenantController extends Controller
         $request->tenant_status = "Added";
         $request->save();
 
-
         $house = House::find($request['house_id']);
         $house->status = "Tenant";
         $house->save();
 
         return response()->json($tenant, 201);
     }
-    
+    public function deletetenant(Request $request)
+    {
+
+        DB::table('tenants')
+            ->where('house_id', $request->house_id)
+            ->update(['status' => "Remove"]);
+
+        $request = House::find($request->house_id);
+        $request->status = "Available";
+        $request->save();
+    }
+
 }

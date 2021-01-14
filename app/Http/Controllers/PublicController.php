@@ -18,37 +18,37 @@ class PublicController extends Controller
             ->where('houses.status', 'Available')
             ->get();
 
-            $myhousephoto = json_decode(json_encode($myhousephoto), true);
+        $myhousephoto = json_decode(json_encode($myhousephoto), true);
 
+        $seenItems = array();
 
-            $seenItems = array();
-
-            foreach($myhousephoto as $index => $item){
-                if(in_array($item["house_id"], $seenItems))
-                    unset($myhousephoto[$index]);
-                else
-                    $seenItems[] = $item["house_id"];
+        foreach ($myhousephoto as $index => $item) {
+            if (in_array($item["house_id"], $seenItems)) {
+                unset($myhousephoto[$index]);
+            } else {
+                $seenItems[] = $item["house_id"];
             }
 
+        }
 
-            foreach($myhouse as $houseindex => $house){
-                foreach($myhousephoto as $index => $photo){
-                    $myhouse[$houseindex]->photolink = "default.png";
+        foreach ($myhouse as $houseindex => $house) {
+            foreach ($myhousephoto as $index => $photo) {
+                $myhouse[$houseindex]->photolink = "default.png";
+            }
+        }
+        foreach ($myhouse as $houseindex => $house) {
+            foreach ($myhousephoto as $index => $photo) {
+                if ($photo["house_id"] == $house->house_id) {
+                    $myhouse[$houseindex]->photolink = $photo["photolink"];
                 }
-            }
-            foreach($myhouse as $houseindex => $house){
-                foreach($myhousephoto as $index => $photo){
-                    if($photo["house_id"] == $house->house_id){
-                        $myhouse[$houseindex]->photolink = $photo["photolink"];
-                    }
-                     
-                }
-            }
 
-            $myhousephoto = array_values($myhousephoto);
+            }
+        }
+
+        $myhousephoto = array_values($myhousephoto);
         $myhousemain['myhouse'] = $myhouse;
         $myhousemain['myhousephoto'] = $myhousephoto;
-
+        
         return response()->json($myhousemain, 201);
     }
 
@@ -63,7 +63,7 @@ class PublicController extends Controller
         foreach ($housephoto as $k => $photo) {
             array_push($housephotolink, "/images/" . $photo);
         }
-        if(empty($housephotolink)){
+        if (empty($housephotolink)) {
             array_push($housephotolink, "/images/default.png");
         }
         return view('house.view', compact('houseView', 'savedfacilities', 'housephotolink'));

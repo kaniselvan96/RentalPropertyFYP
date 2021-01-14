@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <!-- Table -->
             <div class="row justify-content-center">
-                <div class="col-xl-9">
+                <div class="col-xl-10">
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
@@ -94,7 +94,9 @@
                                         <td><button v-if="invoices.payment_status == 'overdue'" class="btn btn-sm btn-info" @click="sendreminder(invoices)">Send</button> <span v-if="invoices.payment_status == 'overdue' && invoices.reminder > 0">({{invoices.reminder}})</span></td>
                                         <td>
                                             <a v-bind:href="'/invoiceview/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">View</a>
+                                            <button v-if="invoices.payment_status != 'paid'"  @click="deleteinvoice(invoices)" class="btn btn-sm btn-warning mr-4">Delete</button>
                                             <a v-if="invoices.payment_status != 'paid' && invoices.can_edit == 'yes'" v-bind:href="'/invoiceedit/'+ invoices.house_id+'/'+ invoices.invoice_id" class="btn btn-sm btn-info mr-4">Edit</a>
+                                           
                                         </td>
                                     </tr>
                                 </tbody>
@@ -104,7 +106,6 @@
                 </div>
             </div>
             <!-- model -->
-
             <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
                 <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
                     <div class="modal-content bg-success">
@@ -118,14 +119,6 @@
                             <div class="py-3">
                                 <form role="form" v-on:submit.prevent="formSubmit">
                                     <div class="form-group mb-3">
-                                        <!-- <div class="form-group">
-                              <label class="form-control-label" for="input-property_type">Professional</label>
-                              <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="professional"/>
-                          </div>
-                          <div class="form-group">
-                              <label class="form-control-label" for="input-property_type">Move Date</label>
-                              <input class="form-control" type="date" id="example-date-input" v-model="move_date">
-                          </div> -->
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-property_type">Choose House</label>
                                             <select class="form-control" id="state" v-model="selected_house_id">
@@ -177,6 +170,27 @@
                         console.log("response", error);
                     });
 
+                // location.href = "/invoicecreate/"+this.selected_house_id;
+            },
+            deleteinvoice(data) {
+                if (confirm("Do you really want to delete?")) {
+                let reminder = {
+                    invoice_id: data.invoice_id,
+                    house_id: data.house_id,
+                    renter_id: data.renter_id,
+                    reminder: data.reminder,
+                };
+                axios
+                    .post("/deleteinvoice", reminder)
+                    // .post("/meeting", data)
+                    .then((response) => {
+                        console.log("response", response);
+                        location.href = "/invoicelist";
+                    })
+                    .catch(function (error) {
+                        console.log("response", error);
+                    });
+                }
                 // location.href = "/invoicecreate/"+this.selected_house_id;
             },
             formSubmit(){

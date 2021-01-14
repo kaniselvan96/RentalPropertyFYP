@@ -17,7 +17,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-8 mx-auto">
+                                <div class="col-md-12 mx-auto">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <vue-image-slider :images="imageArray" :intervalVal="5000" :height="500" :width="800" />

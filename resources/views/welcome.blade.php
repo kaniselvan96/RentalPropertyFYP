@@ -27,6 +27,7 @@
                     window.location = "/listhouse";
                 </script>
             @else
+            
             <my-house :islogin="{{auth()->id()}}"></my-house>
             @endif
         @endif

@@ -31,6 +31,7 @@ class ServiceController extends Controller
             ->join('users', 'users.id', '=', 'tenants.renter_id')
             ->join('houses', 'houses.house_id', '=', 'tenants.house_id')
             ->where('tenants.renter_id', Auth::user()->id)
+            ->where('tenants.status','=', "Active")
             ->get();
             // dd($myhouse);
         return view('service.servicelist', compact('servicelist','myhouse'));
@@ -73,6 +74,11 @@ class ServiceController extends Controller
             ->where('tenants.house_id', $id)
             ->get();
         return view('service.servicecreate', compact('servicelist'));
+    }
+    function servicepage()
+    {
+       
+        return view('service.servicepage');
     }
 
     public function servicestore(Request $request)

@@ -16,6 +16,9 @@
                                 <h6 class="heading-small text-muted mb-4">
                                     Tenant Information
                                 </h6>
+                                <h6 class="heading text-black bg-secondary text-center p-2">
+                                    <img class="card-img-top img-height" v-bind:src="'/images/'+ profile_image" alt="Image placeholder" />
+                                </h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
                                         <div class="col-lg-6">
@@ -126,12 +129,13 @@
                 name: this.addtenant.name,
                 email: this.addtenant.email,
                 phone_number: this.addtenant.phone,
-                ic_number: "",
-                home_address: "",
+                ic_number: this.addtenant.ic_number,
+                home_address: this.addtenant.address,
                 professional: this.addtenant.professional,
                 rental_unit: this.addtenant.address_line1 + " " + this.addtenant.address_line2,
                 rental: this.addtenant.rental,
                 deposit: this.addtenant.deposit,
+                profile_image: this.addtenant.profile_image,
                 due_on: "",
                 lease_start_date: "",
                 lease_expiration_date: "",
@@ -192,7 +196,6 @@
                             .catch(function (error) {
                                 console.log("response", error);
                             });
-
                     })
                     .catch(function (error) {
                         console.log("response", error);
@@ -202,4 +205,9 @@
     };
 </script>
 
-<style></style>
+<style scoped>
+    .img-height {
+        height: auto;
+        width: 350px;
+    }
+</style>

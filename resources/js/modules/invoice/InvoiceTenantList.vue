@@ -70,20 +70,20 @@
                         <div class="py-3">
                             <form role="form" v-on:submit.prevent="formSubmit">
                                 <div class="form-group mb-3">
-                                                                    <h1 class="card-title text-uppercase  mb-0">Total Amount</h1>
+                                    <h1 class="card-title text-uppercase mb-0">Total Amount</h1>
                                     <h1 class="font-weight-bold mb-0">RM {{currentamount}}</h1>
                                 </div>
                                 <label class="form-control-label" for="input-furnishing">Choose Bank</label>
-                                                <select class="form-control" id="exampleFormControlSelect1" v-model="furnishing" required>
-                                                    <option>Affin Bank</option>
-                                                    <option>Agrobank</option>
-                                                    <option>AmBank</option>
-                                                    <option>Bank Simpanan Nasional</option>
-                                                    <option>CIMB</option>
-                                                    <option>HSBC Bank</option>
-                                                    <option>Maybank</option>
-                                                    <option>Public Bank</option>
-                                                </select>
+                                <select class="form-control" id="exampleFormControlSelect1" required>
+                                    <option>Affin Bank</option>
+                                    <option>Agrobank</option>
+                                    <option>AmBank</option>
+                                    <option>Bank Simpanan Nasional</option>
+                                    <option>CIMB</option>
+                                    <option>HSBC Bank</option>
+                                    <option>Maybank</option>
+                                    <option>Public Bank</option>
+                                </select>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-white" @click="paynow()">Pay</button>
                                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -105,8 +105,8 @@
         data() {
             return {
                 selected_house_id: "",
-                currentamount:"",
-                currentid:""
+                currentamount: "",
+                currentid: "",
             };
         },
         computed: {},
@@ -117,17 +117,17 @@
             },
             paynow() {
                 let chargedata = {
-                    invoice_id: this.currentid
+                    invoice_id: this.currentid,
                 };
                 axios
                     .post("/payinvoice", chargedata)
                     // .post("/meeting", data)
                     .then((response) => {
-                    console.log("response", response);
-                    location.href = "/invoicetenantlist";
+                        console.log("response", response);
+                        location.href = "/invoicetenantlist";
                     })
                     .catch(function (error) {
-                    console.log("response", error);
+                        console.log("response", error);
                     });
             },
         },

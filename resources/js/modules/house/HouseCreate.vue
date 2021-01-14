@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label class="form-control-label" for="input-parking">Number Parking</label>
+                                                <label class="form-control-label" for="input-parking">Number of Parking</label>
                                                 <input type="number" id="input-parking" class="form-control" placeholder="parking" v-model="parking" required />
                                             </div>
                                         </div>

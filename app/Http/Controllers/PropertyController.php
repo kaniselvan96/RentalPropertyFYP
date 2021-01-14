@@ -13,7 +13,44 @@ class PropertyController extends Controller
         $houseList = DB::table('houses')
             // ->where('status', 'Available')
             ->get();
-        return view('property.list', compact('houseList'));
+
+            
+        $myhousephoto = DB::table('houses')
+        ->leftjoin('photos', 'photos.house_id', '=', 'houses.house_id')
+        // ->where('houses.status', 'Available')
+        ->get();
+
+        $myhousephoto = json_decode(json_encode($myhousephoto), true);
+
+
+        $seenItems = array();
+
+        foreach($myhousephoto as $index => $item){
+            if(in_array($item["house_id"], $seenItems))
+                unset($myhousephoto[$index]);
+            else
+                $seenItems[] = $item["house_id"];
+        }
+
+
+        foreach($houseList as $houseindex => $house){
+            foreach($myhousephoto as $index => $photo){
+                $houseList[$houseindex]->photolink = "default.png";
+            }
+        }
+        foreach($houseList as $houseindex => $house){
+            foreach($myhousephoto as $index => $photo){
+                if($photo["house_id"] == $house->house_id){
+                    $houseList[$houseindex]->photolink = $photo["photolink"];
+                }
+                 
+            }
+        }
+
+    $myhousephoto = array_values($myhousephoto);
+    $myhousemain['houseList'] = $houseList;
+    $myhousemain['myhousephoto'] = $myhousephoto;
+        return view('property.list', compact('myhousemain'));
     }
 
     public function requestpropertylist()
@@ -23,6 +60,7 @@ class PropertyController extends Controller
             ->join('users', 'users.id', '=', 'tenancy_request.renter_id')
             ->join('houses', 'houses.house_id', '=', 'tenancy_request.house_id')
             ->where('tenancy_request.landlord_id', Auth::user()->id)
+            ->orderBy('tenancy_request.request_id', 'DESC')
             ->get();
 
         // dd( $requestpropertylist);

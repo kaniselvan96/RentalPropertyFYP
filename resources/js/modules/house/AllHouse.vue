@@ -44,7 +44,7 @@
                     <form role="form" v-on:submit.prevent="formSubmit">
                       <div class="form-group mb-3">
                           <div class="form-group">
-                              <label class="form-control-label" for="input-property_type">Professional</label>
+                              <label class="form-control-label" for="input-property_type">Profession</label>
                               <input type="text" id="input-property_type" class="form-control" placeholder="" v-model="professional"/>
                           </div>
                           <div class="form-group">

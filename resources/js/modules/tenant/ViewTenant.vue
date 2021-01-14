@@ -14,6 +14,9 @@
                         </div>
                         <div class="card-body">
                             <h6 class="heading text-black bg-secondary text-center p-2">
+                                <img class="card-img-top img-height" v-bind:src="'/images/'+ profile_image" alt="Image placeholder" />
+                            </h6>
+                            <h6 class="heading text-black bg-secondary text-center p-2">
                                 Tenant Information
                             </h6>
                             <div class="row">
@@ -93,8 +96,8 @@
                 name: this.viewtenant.name,
                 email: this.viewtenant.email,
                 phone_number: this.viewtenant.phone,
-                ic_number: "",
-                home_address: "",
+                ic_number: this.viewtenant.ic_number,
+                home_address: this.viewtenant.address,
                 professional: this.viewtenant.professional,
                 rental_unit: this.viewtenant.address_line1 + " " + this.viewtenant.address_line2,
                 rental: this.viewtenant.rental,
@@ -102,6 +105,7 @@
                 due_on: this.viewtenant.due_on,
                 lease_start_date: this.viewtenant.lease_start_date,
                 lease_expiration_date: this.viewtenant.lease_expiration_date,
+                profile_image: this.viewtenant.profile_image,
             };
         },
         computed: {},
@@ -109,4 +113,9 @@
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .img-height {
+        height: auto;
+        width: 350px;
+    }
+</style>
